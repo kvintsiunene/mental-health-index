@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Индекс ментального благополучия для региональных руководителей</title>
+<style>
+  @font-face {
+    font-family: 'Euclid Circular A';
+    src: url('./fonts/EuclidCircularA-Light.ttf') format('truetype');
+    font-weight: 300; font-style: normal;
+  }
+  @font-face {
+    font-family: 'Euclid Circular A';
+    src: url('./fonts/EuclidCircularA-Regular.ttf') format('truetype');
+    font-weight: 400; font-style: normal;
+  }
+  @font-face {
+    font-family: 'Euclid Circular A';
+    src: url('./fonts/EuclidCircularA-Medium.ttf') format('truetype');
+    font-weight: 500; font-style: normal;
+  }
+  @font-face {
+    font-family: 'Euclid Circular A';
+    src: url('./fonts/EuclidCircularA-SemiBold.ttf') format('truetype');
+    font-weight: 600; font-style: normal;
+  }
+  @font-face {
+    font-family: 'Euclid Circular A';
+    src: url('./fonts/EuclidCircularA-Bold.ttf') format('truetype');
+    font-weight: 700; font-style: normal;
+  }
+
+  :root {
+    --page-max: 1200px;
+    --page-gutter: 32px;
+    --bg: #FFFFFF;
+    --bg-soft: #FFF9E4;
+    --text: #22263B;
+    --text-muted: #5E5E5E;
+    --text-soft: #808080;
+    --accent: #FFB800;
+    --block: #FFB800;
+    --block-soft: #FFE9B2;
+    --block-lightest: #FFF1C2;
+    --line: rgba(34, 38, 59, 0.12);
+    --line-strong: rgba(34, 38, 59, 0.24);
+    --blue: #EAEFF8;
+    --orange: #FE741E;
+    --grey-d: #2C2F40;
+    --grey-m: #908F8F;
+    --grey-l: #EAEFF8;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-pill: 999px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
+  }
+  html, body {
+    font-family: 'Euclid Circular A', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* --- NAV --- */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.96);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 14px var(--page-gutter);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 72px;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex: 0 0 auto;
+    width: auto;
+  }
+  .nav-brand-logo {
+    height: 34px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+  }
+  .nav-brand-logo.prosebya {
+    height: 32px;
+    width: 142px;
+    object-fit: contain;
+    object-position: left center;
+  }
+  .nav-brand-logo.fom {
+    height: 32px;
+    width: 150px;
+    object-fit: contain;
+    object-position: left center;
+    transform: scale(1.06);
+    transform-origin: left center;
+  }
+  .nav-brand-divider {
+    color: var(--text-soft);
+    font-size: 14px;
+    line-height: 1;
+    margin: 0 4px 0 0;
+  }
+  .nav-links {
+    display: flex;
+    gap: 12px;
+    list-style: none;
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    color: var(--text-soft);
+    text-decoration: none;
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1;
+    transition: color 180ms;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 10.5px;
+    padding: 7px 10px;
+    border-radius: var(--radius-pill);
+    transition: background 160ms;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .nav-cta:hover { background: #FFC22E; }
+
+  /* --- LAYOUT --- */
+  .container {
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--page-gutter);
+  }
+  section {
+    padding: 36px 0;
+    position: relative;
+  }
+  section.tight { padding: 32px 0; }
+  .section-eyebrow {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-soft);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    max-width: none;
+    text-wrap: pretty;
+    text-align: left;
+  }
+  .section-sub {
+    font-size: 16px;
+    line-height: 1.52;
+    color: var(--text-muted);
+    max-width: none;
+    margin-bottom: 16px;
+    text-align: left;
+  }
+
+  /* --- DECORATIVE BRUSHES --- */
+  .brush {
+    display: none;
+  }
+
+  /* --- HERO --- */
+  .hero {
+    overflow: hidden;
+    padding: 56px 0 64px;
+    background: var(--bg);
+  }
+  .hero::before {
+    display: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: none;
+    margin: 0;
+  }
+  /* First screen uses the same optical left axis as following section */
+  .hero .container {
+    padding-left: calc(var(--page-gutter) + 118px);
+    padding-right: var(--page-gutter);
+  }
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 1.14;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+    max-width: 19ch;
+  }
+  .hl {
+    background: var(--block);
+    padding: 0 8px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .hero-lede {
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 60ch;
+    margin-bottom: 36px;
+  }
+  .hero-lede b { font-weight: 700; }
+  .hero-cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 24px;
+    border-radius: var(--radius-pill);
+    transition: background 160ms, transform 160ms;
+  }
+  .btn-primary:hover { background: #FFC22E; transform: translateY(-1px); }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 24px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid rgba(34, 38, 59, 0.24);
+    transition: background 180ms, color 180ms;
+  }
+  .btn-ghost:hover { background: var(--bg-soft); color: var(--text); border-color: var(--text); }
+
+  /* --- MANIFESTO --- */
+  .manifest p {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    max-width: none;
+  }
+  .manifest p:last-child { margin-bottom: 0; }
+  .manifest .claim {
+    font-weight: 600;
+    font-size: 24px;
+    margin-top: 16px;
+    line-height: 1.3;
+  }
+  .manifest .gov-quote {
+    margin-top: 28px;
+    padding: 20px 22px;
+    background: var(--bg-soft);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 860px;
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    gap: 16px;
+    align-items: start;
+  }
+  #problem .section-title {
+    max-width: 46ch;
+  }
+  #problem .manifest {
+    display: block;
+    max-width: none;
+  }
+  #problem .manifest .gov-quote {
+    margin-top: 18px;
+    max-width: none;
+  }
+  .manifest .gov-quote .quote-main { min-width: 0; }
+  .manifest .gov-quote .quote-text {
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 18px;
+  }
+  .manifest .gov-quote .quote-text::before {
+    content: "«";
+    position: absolute;
+    left: 0;
+    top: -2px;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--text-muted);
+  }
+  .manifest .gov-quote p {
+    margin-bottom: 10px;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .manifest .gov-quote p:last-child { margin-bottom: 0; }
+  .manifest .gov-quote b { font-weight: 700; }
+  .manifest .gov-quote .quote-meta {
+    color: var(--text-muted);
+    font-size: 12.5px;
+  }
+  .manifest .gov-quote .quote-author {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+  .manifest .gov-quote .quote-photo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--line);
+  }
+  .manifest .gov-quote .quote-person {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.35;
+  }
+  .manifest .gov-quote .quote-person span {
+    display: block;
+    color: var(--text-muted);
+    font-size: 12.5px;
+  }
+  .manifest .gov-quote a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text-soft);
+  }
+  @media (max-width: 860px) {
+    #problem .manifest .gov-quote { margin-top: 12px; }
+    .manifest .gov-quote {
+      grid-template-columns: 1fr;
+      padding: 18px;
+      gap: 12px;
+    }
+    .manifest .gov-quote .quote-author {
+      flex-direction: row;
+      justify-content: flex-start;
+      text-align: left;
+      gap: 10px;
+    }
+    .manifest .gov-quote .quote-photo {
+      width: 52px;
+      height: 52px;
+    }
+  }
+
+  /* --- KEY DATA: METRICS --- */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .metric-card {
+    background: var(--bg-soft);
+    border-radius: var(--radius-lg);
+    padding: 24px 24px 22px;
+    border-top: 3px solid var(--block);
+  }
+  .metric-card.alt { border-top-color: var(--orange); }
+  .metric-card.alt2 { border-top-color: var(--grey-d); }
+  .metric-num {
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -1.4px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .metric-num .unit {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-left: 4px;
+  }
+  .metric-label {
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--text);
+  }
+  .metric-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-muted);
+  }
+  .data-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.25fr);
+    gap: 24px;
+    align-items: start;
+  }
+  #data .section-title { margin-bottom: 8px; max-width: none; }
+  #data .section-sub {
+    margin-bottom: 14px;
+    max-width: none;
+  }
+  #what-researches .section-sub { max-width: none; }
+  #data .metrics-row {
+    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: none;
+    margin: 0;
+  }
+  #data .metric-card {
+    padding: 18px 20px 16px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--block);
+  }
+  #data .metric-num {
+    font-size: 38px;
+    margin-bottom: 8px;
+  }
+  #data .metric-tag { margin-top: 8px; }
+  #data .insight-box {
+    margin-top: 16px;
+    padding: 18px 20px;
+    max-width: none;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .data-foot {
+    margin-top: 22px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .insight-box {
+    margin-top: 32px;
+    border: 1.5px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: 22px 26px;
+    background: var(--bg);
+    max-width: 800px;
+  }
+  .insight-box-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+  .insight-box p {
+    font-size: 14.5px;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: none;
+    margin: 0;
+  }
+  .key-visual-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .key-visual-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+  }
+  .key-visual-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .key-visual-note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+
+  /* --- BLOCKS / CARDS --- */
+  .blocks-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .blocks-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .blocks-3-2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .b {
+    background: var(--block);
+    border-radius: var(--radius-lg);
+    padding: 22px 22px 24px;
+  }
+  .b.soft { background: var(--block-soft); }
+  .b.lightest { background: var(--block-lightest); }
+  .b .b-head {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.2px;
+    line-height: 1.2;
+  }
+  .b .b-sub {
+    font-size: 11px;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .b ul { list-style: none; }
+  .b ul li {
+    position: relative;
+    padding-left: 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+    color: var(--text);
+  }
+  .b ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px;
+    width: 5px; height: 5px;
+    background: var(--text);
+    border-radius: 50%;
+  }
+  .b .b-note {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .b .b-num {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .b .b-cap {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  /* --- METHOD --- */
+  .method-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .step {
+    background: var(--block-soft);
+    border-radius: var(--radius-md);
+    padding: 20px 20px 22px;
+  }
+  .step .sn {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+    letter-spacing: 0.6px;
+  }
+  .step .st {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+  }
+  .step .ss {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+  .method-note {
+    margin-top: 22px;
+    padding: 18px 22px;
+    background: var(--bg-soft);
+    border-radius: var(--radius-md);
+    font-size: 14.5px;
+    color: var(--text);
+    line-height: 1.55;
+    max-width: 760px;
+  }
+  .method-note b { font-weight: 700; }
+
+  /* --- REPORT EXAMPLE — pages mocked as FOM-style report pages --- */
+  .report-pages {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .report-page {
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    padding: 20px 22px 20px;
+    border-top: 3px solid var(--block);
+    box-shadow: none;
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  .report-page-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--accent);
+    margin-bottom: 8px;
+    text-align: left;
+    width: auto;
+  }
+  .report-page-title {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+    color: var(--text);
+    line-height: 1.2;
+    text-align: left;
+  }
+  .report-page-cap {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    max-width: none;
+    text-align: left;
+  }
+  .report-page-foot {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .report-page-foot b { color: var(--text); font-weight: 700; }
+  .report-page.symptoms-page { border-top-color: #FFDE7A; }
+  .report-page.symptoms-page .report-page-tag { color: #957735; }
+  .report-page.social-page { border-top-color: #FE741E; }
+  .report-page.social-page .report-page-tag { color: #CC5D18; }
+
+  /* Page A: index + subindexes */
+  .page-a-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.3fr;
+    gap: 22px;
+  }
+  .page-a-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 22px 24px;
+  }
+  .page-a-card .pa-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0;
+    text-transform: none; color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .page-a-index {
+    display: flex; align-items: center; gap: 22px;
+  }
+  .page-a-index .big-num {
+    font-size: 84px;
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -3px;
+    color: var(--text);
+  }
+
+  /* Page foot text */
+  .insight-text {
+    font-size: 13px; color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .insight-text b { color: var(--text); font-weight: 700; }
+  .report-toggle {
+    display: inline-flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .report-toggle button {
+    border: 1px solid rgba(34, 38, 59, 0.24);
+    background: #fff;
+    color: var(--text-muted);
+    border-radius: var(--radius-pill);
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .report-toggle button.active {
+    background: var(--accent);
+    color: var(--text);
+    border-color: var(--accent);
+  }
+  .report-grid-2 {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .report-mini-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    background: #fff;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .report-mini-card.equal-size {
+    min-height: 320px;
+  }
+  .report-mini-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .report-mini-value {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .report-mini-note {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+  .report-chart-wrap { height: 290px; overflow: visible; }
+  .report-chart-wrap.small { height: 210px; overflow: visible; }
+  .report-chart-wrap.large { height: 420px; overflow: visible; }
+  .report-mini-card svg,
+  .report-mini-card canvas {
+    max-width: 100% !important;
+  }
+  .report-highlight {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-md);
+    background: #fff;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .report-highlight b { font-weight: 700; }
+
+  @media (max-width: 760px) {
+    .report-page { padding: 22px 22px 26px; }
+    .page-a-grid { grid-template-columns: 1fr; }
+    .page-a-index .big-num { font-size: 64px; }
+    .report-page-title { font-size: 20px; }
+    .report-grid-2 { grid-template-columns: 1fr; }
+  }
+
+  /* --- ADDRESS GROUPS section --- */
+  .addr-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    align-items: stretch;
+  }
+  .addr-row.three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .addr-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 18px 16px 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .addr-card.soft { background: #fff; }
+  .addr-card.alert { background: #fff; }
+  .addr-pct {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .addr-pct .delta {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-left: 6px;
+    letter-spacing: 0;
+    vertical-align: middle;
+  }
+  .addr-label {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text);
+    margin-top: 8px;
+    min-height: 38px;
+  }
+  .addr-brush {
+    width: 100%;
+    max-width: 126px;
+    height: 10px;
+    margin: 0 auto 10px;
+    background: rgba(34, 38, 59, 0.1);
+    border-radius: var(--radius-pill);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .addr-brush .fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    height: 100%;
+    background: var(--text);
+    border-radius: var(--radius-pill);
+  }
+  .addr-brush.soft .fill { background: #FFB800; }
+  .addr-brush.warn .fill { background: #FE741E; }
+  .addr-subhead {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    margin-top: 28px;
+  }
+  .addr-subhead:first-child { margin-top: 0; }
+  #addr .section-title {
+    max-width: none;
+    margin-bottom: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+  #addr .section-sub {
+    font-size: 15px;
+    line-height: 1.5;
+    max-width: none;
+    margin-bottom: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+  #data .section-title,
+  #data .section-sub,
+  #report-example .section-title,
+  #report-example .section-sub,
+  #value .section-title,
+  #value .section-sub { max-width: none; }
+  .addr-read-note {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-muted);
+    max-width: none;
+    margin-bottom: 18px;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+  }
+  .addr-caption {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.45;
+    max-width: 68ch;
+  }
+  .addr-caption b { color: var(--text); font-weight: 700; }
+
+  /* --- VALUE GRID (3x2) --- */
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .value-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.25fr);
+    gap: 24px;
+    align-items: start;
+  }
+  #value .section-title {
+    max-width: none;
+    text-align: left;
+  }
+  #value .section-sub {
+    max-width: none;
+    text-align: left;
+  }
+  .value-card {
+    background: var(--block);
+    border-radius: var(--radius-md);
+    padding: 22px 22px 24px;
+  }
+  .value-card.soft { background: var(--block-soft); }
+  .value-card.lightest { background: var(--block-lightest); }
+  .value-num {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .value-card h4 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+  }
+  .value-card p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.5;
+    max-width: none;
+    margin: 0;
+  }
+.value-callout {
+  margin-top: 18px;
+  padding: 16px 20px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.value-callout b { font-weight: 700; }
+  .partners-brief {
+    background: var(--bg-soft);
+    border-radius: var(--radius-lg);
+    padding: 22px 24px;
+  }
+  .partners-brief-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+  }
+  .partner-brief-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 16px 16px 14px;
+  }
+  .partner-brief-logo {
+    height: 26px;
+    width: auto;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .partner-brief-logo.fom {
+    height: 26px;
+  }
+  .partner-brief-text {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+  .partner-brief-links {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .partner-brief-links a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text-soft);
+  }
+  .partner-brief-note {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.4;
+  }
+
+  /* --- ECOSYSTEM --- */
+  .eco-intro {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+    color: var(--text);
+    max-width: 70ch;
+  }
+  .eco-intro b { font-weight: 700; }
+  .eco-intro em { font-style: italic; }
+
+  /* --- CTA / FOOTER ROW --- */
+  .cta-section {
+    background: var(--bg-soft);
+    border-radius: 16px;
+    padding: 30px 30px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section .brush { z-index: 0; }
+  .footer-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+  .meta-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .price-value {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -1.6px;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .price-value .unit { font-size: 22px; font-weight: 600; }
+  .price-sub, .science-sub {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .science-sub b { font-weight: 700; }
+  .cta-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 14px;
+    letter-spacing: -0.2px;
+  }
+  .cta-contact {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .cta-contact a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--accent);
+  }
+  .cta-contact .sep { color: var(--text-soft); margin: 0 8px; }
+  .cta-secondary {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+  .cta-secondary a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text-soft);
+  }
+
+  /* --- PAGE FOOTER --- */
+  .page-footer {
+    border-top: 1px solid var(--line);
+    padding: 22px 0 26px;
+    margin-top: 12px;
+  }
+  .page-footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-soft);
+    letter-spacing: 0.2px;
+  }
+
+  /* --- SVG defaults --- */
+  svg text {
+    font-family: 'Euclid Circular A', -apple-system, sans-serif;
+    letter-spacing: 0 !important;
+    font-kerning: normal;
+    text-rendering: geometricPrecision;
+  }
+  svg text tspan { letter-spacing: 0 !important; }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 960px) {
+    .data-layout { grid-template-columns: 1fr; gap: 16px; }
+    #data .section-title { max-width: none; }
+    #data .section-sub { max-width: none; }
+    .value-layout { grid-template-columns: 1fr; gap: 16px; }
+    #value .section-title,
+    #value .section-sub { max-width: none; text-align: left; }
+    .nav-links { display: none; }
+    .hero .container {
+      padding-left: calc(var(--page-gutter) + 64px);
+      padding-right: var(--page-gutter);
+    }
+    .nav-brand { width: auto; }
+    .nav-brand-logo.prosebya { width: 102px; height: 22px; }
+    .nav-brand-logo.fom { width: 108px; height: 24px; transform: none; }
+    section { padding: 34px 0; }
+    .hero { padding: 44px 0 48px; background: var(--bg); }
+    .hero h1 { font-size: 38px; letter-spacing: -0.02em; }
+    .section-title { font-size: 30px; }
+    .metrics-row { grid-template-columns: 1fr 1fr; }
+    .key-visual-grid { grid-template-columns: 1fr; }
+    .blocks-3, .blocks-4, .blocks-3-2,
+    .method-row, .addr-row, .addr-row.three,
+    .value-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .report-grid { grid-template-columns: 1fr; }
+    .report-block.wide { grid-column: span 1; }
+    .report-grid-2 { grid-template-columns: 1fr; }
+    .report-mini-card.equal-size { min-height: auto; }
+    .report-chart-wrap { height: 240px; }
+    .report-chart-wrap.small { height: 190px; }
+    .report-chart-wrap.large { height: 320px; }
+    .footer-row { grid-template-columns: 1fr; gap: 28px; }
+    .cta-section { padding: 32px 28px; }
+  }
+  @media (max-width: 1280px) {
+    .nav-inner { gap: 12px; }
+    .nav-brand-logo.prosebya { width: 118px; height: 26px; }
+    .nav-brand-logo.fom { width: 112px; height: 24px; transform: scale(1.12); }
+    .nav-links { gap: 10px; }
+    .nav-links a { font-size: 10.5px; }
+    .nav-cta { font-size: 10.5px; padding: 7px 10px; }
+  }
+  @media (max-width: 600px) {
+    .container, .nav-inner, .page-footer-inner { padding-left: 20px; padding-right: 20px; }
+    .hero .container { padding-left: 20px; padding-right: 20px; }
+    .nav-brand-logo.prosebya { width: 100px; height: 22px; }
+    .nav-brand-logo.fom { width: 102px; height: 22px; transform: none; }
+    .hero h1 { font-size: 32px; line-height: 1.16; }
+    .hero-lede { font-size: 18px; }
+    .hero { padding: 36px 0 42px; }
+    .hero { background: var(--bg); }
+    .section-title { font-size: 26px; }
+    .section-sub { margin-bottom: 12px; }
+    .report-page { padding: 14px 12px 16px; }
+    .report-page-title { font-size: 18px; }
+    .report-page-cap { font-size: 14px; }
+    .report-toggle {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 6px;
+      padding-bottom: 4px;
+    }
+    .report-toggle button {
+      flex: 0 0 auto;
+      font-size: 11px;
+      padding: 6px 10px;
+    }
+    .report-mini-card { padding: 10px; }
+    .report-chart-wrap { height: 205px; overflow: hidden; }
+    .report-chart-wrap.small { height: 165px; overflow: hidden; }
+    .report-chart-wrap.large { height: 250px; overflow: hidden; }
+    .metrics-row,
+    .key-visual-grid,
+    .blocks-3, .blocks-4, .blocks-3-2,
+    .method-row, .addr-row, .addr-row.three,
+    .value-grid {
+      grid-template-columns: 1fr;
+    }
+    .partners-brief-grid { grid-template-columns: 1fr; }
+    .nav-cta { display: none; }
+    .price-value { font-size: 36px; }
+  }
+
+  /* --- PRINT --- */
+  @page { size: A4 portrait; margin: 12mm; }
+  @media print {
+    html, body { background: var(--bg); }
+    .nav { position: static; border-bottom: 1px solid var(--line); }
+    .nav-cta, .hero-cta-row { display: none; }
+    section { padding: 28px 0; page-break-inside: avoid; }
+    .brush { display: none; }
+    .hero h1 { font-size: 36px; }
+    .section-title { font-size: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <img class="nav-brand-logo prosebya" src="./assets/logo-prosebya.svg" alt="Логотип Просебя">
+      <span class="nav-brand-divider">×</span>
+      <img class="nav-brand-logo fom" src="./assets/logo-fom-cropped.png" alt="Фонд Общественное мнение">
+    </div>
+    <ul class="nav-links">
+      <li><a href="#problem">Проблема</a></li>
+      <li><a href="#what-researches">Что исследуем</a></li>
+      <li><a href="#data">Данные</a></li>
+      <li><a href="#report-example">Пример отчёта</a></li>
+      <li><a href="#value">Ценность</a></li>
+      <li><a href="#cta">Контакты</a></li>
+    </ul>
+    <a href="#cta" class="nav-cta">Обсудить исследование для вашего региона</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="brush" style="width: 460px; height: 320px; top: -130px; right: -120px; background: var(--block); opacity: 0.22; transform: rotate(12deg);"></div>
+  <div class="brush" style="width: 240px; height: 180px; top: 80px; right: 120px; background: var(--block-soft); opacity: 0.35; transform: rotate(-15deg);"></div>
+  <div class="brush" style="width: 320px; height: 220px; bottom: -90px; left: -110px; background: var(--block-lightest); opacity: 0.28; transform: rotate(-20deg);"></div>
+
+  <div class="container hero-inner">
+    <div class="section-eyebrow">Исследование ментального благополучия для региональных руководителей</div>
+    <h1>Состояние людей в вашем регионе — управляемый ресурс</h1>
+    <p class="hero-lede">
+      <b>Индекс ментального благополучия</b> — короткая и точная диагностика состояния работающего населения для управленческих решений региона. Научная методика Просебя × Фонд «Общественное мнение», апробированная на всероссийской выборке.
+    </p>
+    <div class="hero-cta-row">
+      <a href="#value" class="btn-primary">Что дает региону?
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#cta" class="btn-ghost">Связаться</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM / MANIFESTO -->
+<section id="problem">
+  <div class="container">
+    <div class="section-eyebrow">Национальная цель и задача региона</div>
+    <h2 class="section-title">Здоровье и благополучие людей — национальный приоритет, который требует точной диагностики на уровне региона</h2>
+    <div class="manifest">
+      <p>Производительность труда, текучесть, заболеваемость и социальная устойчивость напрямую связаны с состоянием людей, включая психическое здоровье. Без диагностики этот фактор не виден в управленческой картине.</p>
+      <p>Регулярные измерения позволяют понять причины и точнее воздействовать на ситуацию.</p>
+      <div class="gov-quote">
+        <div class="quote-main">
+          <p class="quote-text">Главой государства обозначена ключевая национальная цель — сохранение населения, укрепление здоровья, повышение благополучия людей, поддержка семьи. Для Правительства это абсолютный приоритет, который касается главной ценности государства и его самого важного социально-экономического ресурса — здоровья нации»</p>
+          <p class="quote-meta">Октябрь 2025 · Конгресс «Национальное здравоохранение — 2025» · <a href="http://government.ru/news/56627/">Источник</a></p>
+        </div>
+        <div class="quote-author">
+          <img class="quote-photo" src="./assets/golikova-portrait.png" alt="Татьяна Голикова">
+          <div class="quote-person"><b>Татьяна Голикова</b><span>Заместитель Председателя Правительства РФ</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE PILLARS -->
+<section id="what-researches">
+  <div class="container">
+    <div class="section-eyebrow">Три опоры измерения</div>
+    <h2 class="section-title">Что именно измеряет Индекс</h2>
+    <p class="section-sub">Не опрос удовлетворённости, а многоуровневая диагностика по трём связанным направлениям.</p>
+
+    <div class="blocks-3">
+      <div class="b">
+        <div class="b-head">Ментальное состояние</div>
+        <div class="b-note">Стресс-статус и симптомы: выгорание, тревожность, упадок сил, нарушения сна, подавленность, ощущение одиночества, панические атаки.</div>
+      </div>
+      <div class="b soft">
+        <div class="b-head">Внутренние факторы</div>
+        <div class="b-note">Психологический профиль и устойчивость: уверенность в себе, энергичность, адаптивность, отношение к переменам, способность справляться с давлением.</div>
+      </div>
+      <div class="b lightest">
+        <div class="b-head">Внешние факторы</div>
+        <div class="b-note">Профессиональные (нагрузка, оплата, отношения), личные (семья, жильё, экология, здоровье) и социальные (ситуация в стране, регионе и районе).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY DATA -->
+<section id="data" style="background: var(--bg-soft);">
+  <div class="container">
+    <div class="data-layout">
+      <div class="data-intro">
+        <div class="section-eyebrow">Ключевые данные</div>
+        <h2 class="section-title">Что уже показали исследования по России и Московской области</h2>
+        <p class="section-sub">Россия — август 2025, Московская область — сентябрь 2025. Ниже — сопоставимые ориентиры из этих исследований: шкала общего индекса, доли по уровням и ключевые риск-факторы.</p>
+      </div>
+      <div class="data-cards">
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-num">30 / 31 <span class="unit">балл.</span></div>
+            <div class="metric-label">Общий индекс на шкале от −100 до +100: Россия / Московская область.</div>
+            <div class="metric-tag">Базовый ориентир</div>
+          </div>
+          <div class="metric-card">
+          <div class="metric-num">35<span class="unit">%</span></div>
+            <div class="metric-label">Доля людей с низким уровнем одинакова в обеих выборках.</div>
+            <div class="metric-tag">Структура риска</div>
+          </div>
+          <div class="metric-card alt">
+            <div class="metric-num">57<span class="unit">%</span></div>
+            <div class="metric-label">Переживали стресс за последний месяц по данным России.</div>
+            <div class="metric-tag">Сигнал внимания</div>
+          </div>
+          <div class="metric-card alt" style="border-top-color: #E25A2C;">
+            <div class="metric-num">−6 / −2 <span class="unit">балл.</span></div>
+            <div class="metric-label">Социальные факторы по шкале от −100 до +100: Россия (−6) / Московская область (−2).</div>
+            <div class="metric-tag">Ключевая зона риска</div>
+          </div>
+        </div>
+
+        <div class="insight-box">
+          <div class="insight-box-title">Главный вывод</div>
+          <p>Чтобы реализовать национальный приоритет по здоровью и благополучию, региону нужна регулярная диагностика состояния людей и адресные меры по группам риска.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADDRESS GROUPS -->
+<section id="addr" style="background: var(--bg-soft);">
+  <div class="container">
+    <div class="section-eyebrow">Адресные группы и группы риска</div>
+    <h2 class="section-title">Кто в зоне наибольшей уязвимости</h2>
+    <p class="section-sub">Данные Московской области. Приоритетные группы для адресных региональных мер.</p>
+    <p class="addr-read-note">Как читать: процент показывает долю людей <b>внутри каждой группы</b>, у которых выявлен низкий уровень индекса ментального благополучия.</p>
+
+    <div class="addr-subhead">По социально-демографическим признакам</div>
+    <div class="addr-row">
+      <div class="addr-card">
+        <div class="addr-brush"><div class="fill" style="width:43%;"></div></div>
+        <div class="addr-pct">43%</div>
+        <div class="addr-label">Молодёжь<br>18–35 лет</div>
+      </div>
+      <div class="addr-card soft">
+        <div class="addr-brush soft"><div class="fill" style="width:43%;"></div></div>
+        <div class="addr-pct">43%</div>
+        <div class="addr-label">Женщины</div>
+      </div>
+      <div class="addr-card soft">
+        <div class="addr-brush soft"><div class="fill" style="width:41%;"></div></div>
+        <div class="addr-pct">41%</div>
+        <div class="addr-label">Не состоят<br>в браке</div>
+      </div>
+      <div class="addr-card soft">
+        <div class="addr-brush warn"><div class="fill" style="width:40%;"></div></div>
+        <div class="addr-pct">40%</div>
+        <div class="addr-label">Без детей</div>
+      </div>
+    </div>
+
+    <p class="addr-caption"><b>Вывод для региона.</b> В фокусе — молодёжь, женщины, жители без семьи и детей. Именно по этим группам адресные меры поддержки и профилактики дадут самый заметный эффект для устойчивости территории.</p>
+  </div>
+</section>
+
+<!-- REPORT EXAMPLE -->
+<section id="report-example" style="background: var(--bg-soft);">
+  <div class="container">
+    <div class="section-eyebrow">Пример отчёта</div>
+    <h2 class="section-title">Как выглядит итоговая аналитика для региона</h2>
+    <p class="section-sub">В отчёте регион видит сравнение с Россией в целом, другими регионами и своим контуром ответственности.</p>
+
+    <div class="report-pages">
+      <div class="report-page symptoms-page">
+        <div class="report-page-tag">Стр. 1 · Индекс и структура распределения</div>
+        <div class="report-page-title">Значение индекса и доли групп населения</div>
+        <div class="report-page-cap">Совместный анализ общего индекса и распределения по уровням риска показывает масштаб задачи и приоритетность мер для региона.</div>
+        <div class="report-toggle" data-toggle-group="index">
+          <button class="active" data-target="russia">Россия</button>
+          <button data-target="moscow">Московская область</button>
+          <button data-target="your">Ваш регион</button>
+        </div>
+        <div class="report-grid-2">
+          <div class="report-mini-card equal-size">
+            <div class="report-mini-title">Шкала общего индекса (−100…+100)</div>
+            <svg viewBox="0 0 420 220" width="100%" preserveAspectRatio="xMidYMid meet">
+              <line id="indexScaleBase" x1="98" y1="20" x2="98" y2="200" stroke="#22263B22" stroke-width="18" stroke-linecap="round"></line>
+              <line id="indexScaleLow" x1="98" y1="110" x2="98" y2="200" stroke="#FFD96B" stroke-width="18" stroke-linecap="round"></line>
+              <line id="indexScaleHigh" x1="98" y1="20" x2="98" y2="110" stroke="#FFCE30" stroke-width="18" stroke-linecap="round"></line>
+              <line x1="98" y1="20" x2="108" y2="20" stroke="#22263B66"></line>
+              <line x1="98" y1="110" x2="108" y2="110" stroke="#22263B66"></line>
+              <line x1="98" y1="200" x2="108" y2="200" stroke="#22263B66"></line>
+              <text x="120" y="24" font-size="11" fill="#22263B99">+100</text>
+              <text x="120" y="114" font-size="11" fill="#22263B99">0</text>
+              <text x="120" y="204" font-size="11" fill="#22263B99">−100</text>
+
+              <circle id="indexMarker" cx="98" cy="83" r="8" fill="#22263B"></circle>
+              <text id="indexRegionValue" x="150" y="87" font-size="13" font-weight="700" fill="#22263B">Россия: 30</text>
+            </svg>
+          </div>
+          <div class="report-mini-card equal-size">
+            <div class="report-mini-title">Распределение по группам (%)</div>
+            <div class="report-chart-wrap small"><canvas id="reportDistributionChart"></canvas></div>
+            <div style="display:flex; flex-direction:column; gap:6px; margin-top:10px; font-size:12px; color:var(--text);">
+              <div><span style="display:inline-block;width:10px;height:10px;background:#FFE9A8;border-radius:2px;margin-right:8px;"></span>Низкий уровень — <span id="distLow">35%</span></div>
+              <div><span style="display:inline-block;width:10px;height:10px;background:#FFCE30;border-radius:2px;margin-right:8px;"></span>Средний уровень — <span id="distMid">32%</span></div>
+              <div><span style="display:inline-block;width:10px;height:10px;background:#22263B;border-radius:2px;margin-right:8px;"></span>Высокий уровень — <span id="distHigh">34%</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="report-page-foot"><b>Для чего региону эта информация.</b> Регион получает не абстрактный средний балл, а точную основу для решений: общий уровень состояния и долю людей, которым нужна приоритетная поддержка.</div>
+      </div>
+
+      <div class="report-page social-page">
+        <div class="report-page-tag">Стр. 2 · Субиндексы и индикаторы</div>
+        <div class="report-page-title">Вклад основных факторов в состояние жителей региона</div>
+        <div class="report-page-cap">Ключевые факторы с наибольшим влиянием на итоговый уровень индекса и приоритетность управленческих действий.</div>
+        <div class="report-toggle" data-toggle-group="radar">
+          <button class="active" data-target="russia">Россия</button>
+          <button data-target="moscow">Московская область</button>
+          <button data-target="your">Ваш регион</button>
+        </div>
+        <div class="report-chart-wrap large"><canvas id="reportRadarChart"></canvas></div>
+        <div class="report-mini-note" id="reportRadarNote">Россия: профиль по 7 индикаторам на единой шкале от −100 до +100.</div>
+        <div class="report-page-foot"><b>Для чего региону эта информация.</b> Приоритетные меры формируются по факторам с наибольшим отрицательным вкладом в состояние жителей: в первую очередь по зонам стресса, социальной тревоги и дефицита внутренних ресурсов.</div>
+      </div>
+
+      <div class="report-page">
+        <div class="report-page-tag">Стр. 3 · Симптомы состояния</div>
+        <div class="report-page-title">Частота ключевых симптомов у жителей региона</div>
+        <div class="report-page-cap">Профиль симптомов, которые формируют нагрузку на здоровье и требуют приоритетных профилактических мер.</div>
+        <div class="report-toggle" data-toggle-group="symptoms">
+          <button class="active" data-target="russia">Россия</button>
+          <button data-target="moscow">Московская область</button>
+          <button data-target="your">Ваш регион</button>
+        </div>
+        <div class="report-chart-wrap"><canvas id="reportSymptomsChart"></canvas></div>
+        <div class="report-mini-note" id="reportSymptomsNote">Россия: доли симптомов «часто/постоянно» по ключевым позициям.</div>
+        <div class="report-page-foot"><b>Для чего региону эта информация.</b> В фокус приоритетных мер попадают симптомы с наибольшей частотой, так как именно они сильнее всего влияют на общий уровень ментального благополучия жителей.</div>
+      </div>
+
+      <div class="report-page">
+        <div class="report-page-tag">Стр. 4 · Социальная тревога</div>
+        <div class="report-page-title">Что беспокоит людей сильнее всего</div>
+        <div class="report-page-cap">Профиль социальной тревоги по ключевым темам: страна, экономика, район и область.</div>
+        <div class="report-toggle" data-toggle-group="social">
+          <button class="active" data-target="russia">Россия</button>
+          <button data-target="moscow">Московская область</button>
+          <button data-target="your">Ваш регион</button>
+        </div>
+        <div class="report-chart-wrap"><canvas id="reportSocialChart"></canvas></div>
+        <div class="report-mini-note" id="reportSocialNote">Россия: доли тревоги по ключевым социальным темам.</div>
+        <div class="report-page-foot"><b>Для чего региону эта информация.</b> Страница позволяет отделить общий национальный фон тревоги от локальных региональных факторов, на которые администрация может влиять напрямую.</div>
+      </div>
+    </div>
+
+    <div class="report-page-foot" style="margin-top:24px; padding-top:0; border:0; max-width:none; width:100%; font-size:13px; text-wrap:balance;">
+      Это примеры ключевых страниц, а в полном отчёте доступны дополнительные срезы: возраст, пол, семейный статус, территория и группы риска.
+    </div>
+  </div>
+</section>
+
+<!-- VALUE FOR REGION -->
+<section id="value">
+  <div class="container">
+    <div class="value-layout">
+      <div class="value-intro">
+        <div class="section-eyebrow">Ценность для региона</div>
+        <h2 class="section-title">Что получает региональная администрация</h2>
+        <p class="section-sub">Четыре практических результата для управленческих решений региона — с опорой на валидированные данные и научно обоснованную методологию измерения.</p>
+      </div>
+      <div class="value-content">
+        <div class="value-grid">
+          <div class="value-card">
+            <div class="value-num">01</div>
+            <h4>Объективная картина</h4>
+            <p>Данные о реальном состоянии работающего населения: ключевые риски и ресурсы.</p>
+          </div>
+          <div class="value-card soft">
+            <div class="value-num">02</div>
+            <h4>Бенчмарк с другими регионами</h4>
+            <p>Сравнение с Россией и регионами: где ваш регион сильнее и где отстает.</p>
+          </div>
+          <div class="value-card soft">
+            <div class="value-num">03</div>
+            <h4>Адресные группы для работы</h4>
+            <p>Понятные приоритетные группы по риску для точечных региональных мер.</p>
+          </div>
+          <div class="value-card soft">
+            <div class="value-num">04</div>
+            <h4>Измеримая динамика</h4>
+            <p>Повторные замеры показывают эффект мер в цифрах, а не в ощущениях.</p>
+          </div>
+        </div>
+        <div class="value-callout"><b>Стандарт человекоцентричного управления:</b> регион, который системно измеряет и улучшает ментальное благополучие жителей, формирует устойчивую модель управления территорией.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS WHO -->
+<section>
+  <div class="container">
+    <div class="partners-brief">
+      <div class="section-eyebrow" style="margin-bottom:4px;">Кто проводит исследование</div>
+      <h2 class="section-title" style="margin-bottom:8px; max-width: none;">Коротко о партнёрах проекта</h2>
+      <div class="partners-brief-grid">
+        <div class="partner-brief-card">
+          <img class="partner-brief-logo fom" src="./assets/logo-fom-cropped.png" alt="Логотип Фонда «Общественное мнение»">
+          <div class="partner-brief-text"><b>Фонд «Общественное мнение»</b> — одна из ведущих российских социологических организаций. Отвечает за методологию опроса, выборку и достоверность данных.</div>
+          <div class="partner-brief-links"><a href="https://fom.ru">fom.ru</a></div>
+        </div>
+        <div class="partner-brief-card">
+          <img class="partner-brief-logo" src="./assets/logo-prosebya.svg" alt="Логотип Просебя">
+          <div class="partner-brief-text"><b>Просебя</b> — платформа психологической поддержки и развития навыков устойчивости. Отвечает за экспертизу ментального благополучия и практическую применимость результатов для региона.</div>
+          <div class="partner-brief-links"><a href="https://prosebya.ru">prosebya.ru</a></div>
+          <div class="partner-brief-note">Входит в группу «Ренессанс Страхование»</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-section">
+      <div class="brush" style="width: 280px; height: 200px; top: -90px; right: -80px; background: var(--block); opacity: 0.25; transform: rotate(14deg);"></div>
+      <div class="brush" style="width: 220px; height: 160px; bottom: -80px; left: -70px; background: var(--block-soft); opacity: 0.34; transform: rotate(-18deg);"></div>
+
+      <div class="footer-row">
+        <div>
+          <div class="meta-label">Обсудить исследование для вашего региона</div>
+          <div class="cta-title">Соберём под масштаб региона и проведём исследование за 5 недель</div>
+          <div class="cta-contact">
+            <a href="mailto:business@prosebya.ru">business@prosebya.ru</a>
+            <span class="sep">·</span>
+            <a href="https://prosebya.ru">prosebya.ru</a>
+          </div>
+          <div class="cta-secondary">или Фонд «Общественное мнение» напрямую: <a href="mailto:fom@fom.ru">fom@fom.ru</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <div class="page-footer-inner">
+    <div>© 2026 Просебя × Фонд «Общественное Мнение»</div>
+    <div>Инфраструктура устойчивости для региональной власти</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<script>
+(() => {
+  const toggles = document.querySelectorAll('.report-toggle');
+  const state = { index: 'moscow', radar: 'moscow', symptoms: 'moscow', social: 'moscow' };
+  const palette = { base: '#22263B', compare: '#FF804B', accent: '#FE741E' };
+
+  const dataByView = {
+    russia: {
+      regionName: 'Россия',
+      indexValue: 30,
+      indexNote: 'Россия: индекс 30; низкий 35%, средний 32%, высокий 34%.',
+      distribution: [35, 32, 34],
+      radarSeries: [3, 49, 34, 39, 47, 43, -6],
+      radarCompareLabel: 'Московская область',
+      radarCompare: [8, 53, 27, 39, 49, 44, -2],
+      symptomsCompareLabel: 'Московская область',
+      symptomsCompare: [26, 23, 20, 17, 16],
+      socialCompareLabel: 'Московская область',
+      socialCompare: [57, 57, 58, 43, 42]
+    },
+    moscow: {
+      regionName: 'Московская область',
+      indexValue: 31,
+      indexNote: 'Московская область: индекс 31; низкий 35%, средний 27%, высокий 38%.',
+      distribution: [35, 27, 38],
+      radarSeries: [8, 53, 27, 39, 49, 44, -2],
+      radarCompareLabel: 'Россия',
+      radarCompare: [3, 49, 34, 39, 47, 43, -6],
+      symptomsCompareLabel: 'Россия',
+      symptomsCompare: [24, 22, 19, 16, 14],
+      socialCompareLabel: 'Россия',
+      socialCompare: [58, 57, 57, 43, 42]
+    },
+    regions: {
+      regionName: 'Другие регионы',
+      indexValue: 31,
+      indexNote: 'Московская область: +31, медиана других регионов: +29',
+      distribution: [36, 29, 35],
+      radarSeries: [6, 50, 31, 37, 46, 42, -4],
+      radarCompareLabel: 'Другие регионы',
+      radarCompare: [6, 50, 31, 37, 46, 42, -4],
+      symptomsCompareLabel: 'Другие регионы',
+      symptomsCompare: [22, 20, 18, 15, 13],
+      socialCompareLabel: 'Другие регионы',
+      socialCompare: [55, 54, 53, 41, 40]
+    },
+    your: {
+      regionName: 'Ваш регион',
+      indexValue: null,
+      indexNote: 'Ваш регион: здесь автоматически появятся фактические данные после проведения исследования.',
+      distribution: null,
+      radarSeries: null,
+      radarCompareLabel: 'Ваш регион',
+      radarCompare: [5, 46, 28, 35, 44, 40, -8],
+      symptomsCompareLabel: 'Ваш регион',
+      symptomsCompare: [27, 24, 22, 18, 16],
+      socialCompareLabel: 'Ваш регион',
+      socialCompare: [60, 59, 58, 48, 47]
+    }
+  };
+
+  const indexMarker = document.getElementById('indexMarker');
+  const indexRegionValue = document.getElementById('indexRegionValue');
+  const indexScaleLow = document.getElementById('indexScaleLow');
+  const indexScaleHigh = document.getElementById('indexScaleHigh');
+  const reportRadarNote = document.getElementById('reportRadarNote');
+  const reportSymptomsNote = document.getElementById('reportSymptomsNote');
+  const reportSocialNote = document.getElementById('reportSocialNote');
+  const distLow = document.getElementById('distLow');
+  const distMid = document.getElementById('distMid');
+  const distHigh = document.getElementById('distHigh');
+  let currentIndexTarget = 'russia';
+
+  const distributionChart = new Chart(document.getElementById('reportDistributionChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Распределение'],
+      datasets: [
+        { label: 'Низкий', data: [dataByView.russia.distribution[0]], backgroundColor: '#FFE9A8', borderRadius: 6, borderSkipped: false, stack: 's' },
+        { label: 'Средний', data: [dataByView.russia.distribution[1]], backgroundColor: '#FFCE30', borderRadius: 6, borderSkipped: false, stack: 's' },
+        { label: 'Высокий', data: [dataByView.russia.distribution[2]], backgroundColor: '#22263B', borderRadius: 6, borderSkipped: false, stack: 's' }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { stacked: true, min: 0, max: 100, ticks: { callback: (v) => `${v}%` }, grid: { color: '#22263B12' } },
+        y: { stacked: true, grid: { display: false } }
+      },
+      layout: { padding: { top: 14, right: 8, bottom: 8, left: 8 } }
+    }
+  });
+
+  const radarChart = new Chart(document.getElementById('reportRadarChart'), {
+    type: 'radar',
+    data: {
+      labels: [
+        'Стресс-статус',
+        'Симптомы неблагополучия',
+        'Психологический профиль',
+        'Психологическая устойчивость',
+        'Профессиональные факторы',
+        'Личностные факторы',
+        'Социальные факторы'
+      ],
+      datasets: [
+        { label: 'Россия', data: dataByView.russia.radarSeries, borderColor: palette.base, backgroundColor: 'rgba(34,38,59,0.14)', pointRadius: 3, borderWidth: 2.5 }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          min: -100,
+          max: 100,
+          ticks: { stepSize: 50, backdropColor: 'transparent' },
+          grid: { color: '#22263B1F' },
+          angleLines: { color: '#22263B1A' },
+          pointLabels: { color: '#22263B', font: { size: 11 } }
+        }
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'rectRounded',
+            boxWidth: 14,
+            boxHeight: 9,
+            padding: 14
+          }
+        }
+      },
+      layout: { padding: { top: 24, right: 28, bottom: 18, left: 28 } }
+    }
+  });
+
+  const symptomsLabels = ['Измотанность', 'Тревога', 'Нарушения сна', 'Подавленность', 'Трудности с концентрацией'];
+  const symptomsChart = new Chart(document.getElementById('reportSymptomsChart'), {
+    type: 'bar',
+    data: {
+      labels: symptomsLabels,
+      datasets: [
+        {
+          label: 'Россия',
+          data: [24, 22, 19, 16, 14],
+          backgroundColor: palette.base,
+          borderRadius: 8,
+          borderSkipped: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'circle',
+            boxWidth: 10,
+            boxHeight: 10,
+            padding: 12
+          }
+        }
+      },
+      scales: {
+        x: {
+          min: 0,
+          max: 30,
+          ticks: { callback: (v) => `${v}%` },
+          grid: { color: '#22263B12' }
+        },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
+  const socialChart = new Chart(document.getElementById('reportSocialChart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Ситуация в стране',
+        'Состояние экономики',
+        'Конфликт с Западом',
+        'Ситуация в районе',
+        'Ситуация в области'
+      ],
+      datasets: [
+        {
+          label: 'Россия',
+          data: [58, 57, 57, 43, 42],
+          backgroundColor: palette.base,
+          borderRadius: 8,
+          borderSkipped: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            usePointStyle: true,
+            pointStyle: 'circle',
+            boxWidth: 10,
+            boxHeight: 10,
+            padding: 12
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { callback: (v) => `${v}%` } }
+      }
+    }
+  });
+
+  function updateView(group, target) {
+    state[group] = target;
+    const view = dataByView[target];
+    if (!view) return;
+    if (group === 'index') {
+      currentIndexTarget = target;
+      if (target === 'your') {
+        indexMarker.setAttribute('opacity', '0');
+        indexRegionValue.setAttribute('x', '132');
+        indexRegionValue.setAttribute('y', '88');
+        indexRegionValue.setAttribute('fill', '#9CA1BD');
+        indexRegionValue.textContent = 'Данные появятся после исследования';
+        indexScaleLow.setAttribute('stroke', '#D7DBE8');
+        indexScaleHigh.setAttribute('stroke', '#D7DBE8');
+        distributionChart.data.datasets[0].data = [33.3];
+        distributionChart.data.datasets[1].data = [33.3];
+        distributionChart.data.datasets[2].data = [33.4];
+        distributionChart.data.datasets[0].backgroundColor = '#E3E6EF';
+        distributionChart.data.datasets[1].backgroundColor = '#D7DBE8';
+        distributionChart.data.datasets[2].backgroundColor = '#C9CFDF';
+        distributionChart.update();
+        distLow.textContent = 'доля';
+        distMid.textContent = 'доля';
+        distHigh.textContent = 'доля';
+      } else {
+      const y = 200 - ((view.indexValue + 100) / 200) * 180;
+        indexMarker.setAttribute('opacity', '1');
+        indexMarker.setAttribute('cy', String(y));
+      indexRegionValue.setAttribute('x', '150');
+        indexRegionValue.setAttribute('y', String(y + 4));
+        indexRegionValue.setAttribute('fill', '#22263B');
+        indexRegionValue.textContent = `${view.regionName}: ${view.indexValue}`;
+        indexScaleLow.setAttribute('stroke', '#FFD96B');
+        indexScaleHigh.setAttribute('stroke', '#FFCE30');
+        distributionChart.data.datasets[0].data = [view.distribution[0]];
+        distributionChart.data.datasets[1].data = [view.distribution[1]];
+        distributionChart.data.datasets[2].data = [view.distribution[2]];
+        distributionChart.data.datasets[0].backgroundColor = '#FFE9A8';
+        distributionChart.data.datasets[1].backgroundColor = '#FFCE30';
+        distributionChart.data.datasets[2].backgroundColor = '#22263B';
+        distributionChart.update();
+        distLow.textContent = `${view.distribution[0]}%`;
+        distMid.textContent = `${view.distribution[1]}%`;
+        distHigh.textContent = `${view.distribution[2]}%`;
+      }
+    }
+    if (group === 'radar') {
+      if (target === 'your') {
+        radarChart.data.datasets[0].label = 'Ваш регион';
+        radarChart.data.datasets[0].data = [10, 10, 10, 10, 10, 10, 10];
+        radarChart.data.datasets[0].borderColor = '#C9CFDF';
+        radarChart.data.datasets[0].backgroundColor = 'rgba(201,207,223,0.20)';
+        reportRadarNote.textContent = 'Ваш регион: здесь появится фактический профиль субиндексов и индикаторов после исследования.';
+      } else if (target === 'russia') {
+        radarChart.data.datasets[0].label = 'Россия';
+        radarChart.data.datasets[0].data = dataByView.russia.radarSeries;
+        radarChart.data.datasets[0].borderColor = '#22263B';
+        radarChart.data.datasets[0].backgroundColor = 'rgba(34,38,59,0.14)';
+        reportRadarNote.textContent = 'Россия: профиль по 7 индикаторам на единой шкале от −100 до +100.';
+      } else if (target === 'moscow') {
+        radarChart.data.datasets[0].label = 'Московская область';
+        radarChart.data.datasets[0].data = dataByView.moscow.radarSeries;
+        radarChart.data.datasets[0].borderColor = '#FF804B';
+        radarChart.data.datasets[0].backgroundColor = 'rgba(255,128,75,0.16)';
+        reportRadarNote.textContent = 'Московская область: профиль по 7 индикаторам на единой шкале от −100 до +100.';
+      }
+      radarChart.update();
+    }
+    if (group === 'symptoms') {
+      if (target === 'your') {
+        symptomsChart.data.datasets[0].label = 'Ваш регион';
+        symptomsChart.data.datasets[0].data = [20, 20, 20, 20, 20];
+        symptomsChart.data.datasets[0].backgroundColor = '#C9CFDF';
+        reportSymptomsNote.textContent = 'Ваш регион: после исследования здесь отобразится фактический профиль симптомов.';
+      } else if (target === 'russia') {
+        symptomsChart.data.datasets[0].label = 'Россия';
+        symptomsChart.data.datasets[0].data = [24, 22, 19, 16, 14];
+        symptomsChart.data.datasets[0].backgroundColor = '#22263B';
+        reportSymptomsNote.textContent = 'Россия: доли симптомов «часто/постоянно» по ключевым позициям.';
+      } else if (target === 'moscow') {
+        symptomsChart.data.datasets[0].label = 'Московская область';
+        symptomsChart.data.datasets[0].data = [26, 23, 20, 17, 16];
+        symptomsChart.data.datasets[0].backgroundColor = '#FF804B';
+        reportSymptomsNote.textContent = 'Московская область: доли симптомов «часто/постоянно» по ключевым позициям.';
+      }
+      symptomsChart.update();
+    }
+    if (group === 'social') {
+      if (target === 'your') {
+        socialChart.data.datasets[0].label = 'Ваш регион';
+        socialChart.data.datasets[0].data = [50, 50, 50, 50, 50];
+        socialChart.data.datasets[0].backgroundColor = '#C9CFDF';
+        reportSocialNote.textContent = 'Ваш регион: после исследования здесь отобразится фактический профиль социальной тревоги.';
+      } else if (target === 'russia') {
+        socialChart.data.datasets[0].label = 'Россия';
+        socialChart.data.datasets[0].data = [58, 57, 57, 43, 42];
+        socialChart.data.datasets[0].backgroundColor = '#22263B';
+        reportSocialNote.textContent = 'Россия: доли тревоги по ключевым социальным темам.';
+      } else if (target === 'moscow') {
+        socialChart.data.datasets[0].label = 'Московская область';
+        socialChart.data.datasets[0].data = [57, 57, 58, 43, 42];
+        socialChart.data.datasets[0].backgroundColor = '#FF804B';
+        reportSocialNote.textContent = 'Московская область: доли тревоги по ключевым социальным темам.';
+      }
+      socialChart.update();
+    }
+  }
+
+  toggles.forEach((wrap) => {
+    const group = wrap.dataset.toggleGroup;
+    wrap.querySelectorAll('button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        wrap.querySelectorAll('button').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateView(group, btn.dataset.target);
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
