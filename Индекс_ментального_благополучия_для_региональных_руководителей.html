@@ -33,23 +33,56 @@
 
   :root {
     --page-max: 1200px;
-    --page-gutter: 32px;
+    --page-gutter: clamp(20px, 3.2vw, 40px);
+
+    /* Brand palette */
+    --dominant: #FFA500;
+    --energy: #FF4500;
+    --coral: #FE8A78;
+    --navy: #1E2255;
+    --ink: #0F1F03;
+    --blue: #3A66FF;
+    --sky: #6FA8FF;
+    --ivory: #FBEFCC;
+    --pulse: #FFA09E;
+
+    /* Semantic tokens */
     --bg: #FFFFFF;
-    --bg-soft: #FFF9E4;
-    --text: #22263B;
-    --text-muted: #5E5E5E;
-    --text-soft: #808080;
-    --accent: #FFB800;
-    --block: #FFB800;
-    --block-soft: #FFE9B2;
-    --block-lightest: #FFF1C2;
-    --line: rgba(34, 38, 59, 0.12);
-    --line-strong: rgba(34, 38, 59, 0.24);
-    --blue: #EAEFF8;
-    --orange: #FE741E;
-    --grey-d: #2C2F40;
-    --grey-m: #908F8F;
-    --grey-l: #EAEFF8;
+    --bg-soft: var(--ivory);
+    --text: var(--navy);
+    --text-muted: rgba(30, 34, 85, 0.72);
+    --text-soft: rgba(30, 34, 85, 0.5);
+    --text-on-orange: var(--ivory);
+    --accent: var(--dominant);
+    --block: var(--dominant);
+    --block-soft: var(--ivory);
+    --block-lightest: var(--ivory);
+    --line: rgba(30, 34, 85, 0.12);
+    --line-strong: rgba(30, 34, 85, 0.22);
+    --accent-soft: var(--coral);
+    --accent-cream: var(--ivory);
+    --info: var(--blue);
+    --info-light: var(--sky);
+
+    /* Legacy aliases (existing class names) */
+    --yellow-soft: var(--ivory);
+    --yellow-muted: var(--ivory);
+    --yellow-light: var(--ivory);
+    --yellow: var(--dominant);
+    --yellow-deep: var(--dominant);
+    --orange-ring: var(--energy);
+    --orange: #E63E00;
+    --grey-d: var(--navy);
+    --grey-m: rgba(30, 34, 85, 0.55);
+    --grey-l: var(--ivory);
+    --forbes-bar: var(--dominant);
+    --rep-dark: var(--energy);
+    --rep-mid: var(--dominant);
+    --rep-light: var(--pulse);
+    --rep-muted: var(--ivory);
+    --rep-panel: var(--ivory);
+    --rep-line: var(--line);
+    --shadow-soft: 0 12px 40px rgba(30, 34, 85, 0.08);
     --radius-sm: 8px;
     --radius-md: 14px;
     --radius-lg: 20px;
@@ -65,103 +98,120 @@
   }
   html, body {
     font-family: 'Euclid Circular A', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
+    background: var(--bg-soft);
     color: var(--text);
     font-size: 17px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+  }
 
   /* --- NAV --- */
   .nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(255,255,255,0.96);
-    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    border-bottom: 1px solid var(--line-strong);
+    box-shadow: none;
   }
   .nav-inner {
-    max-width: var(--page-max);
-    margin: 0 auto;
-    padding: 14px var(--page-gutter);
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: clamp(16px, 2.5vw, 32px);
+    padding-top: 14px;
+    padding-bottom: 14px;
     min-height: 72px;
   }
   .nav-brand {
     display: flex;
     align-items: center;
-    gap: 8px;
-    min-width: 0;
+    gap: 10px;
     flex: 0 0 auto;
-    width: auto;
+    min-width: 0;
+    max-width: 100%;
   }
   .nav-brand-logo {
-    height: 34px;
-    width: auto;
     display: block;
     flex-shrink: 0;
+    object-fit: contain;
+    object-position: left center;
   }
   .nav-brand-logo.prosebya {
-    height: 32px;
-    width: 142px;
-    object-fit: contain;
-    object-position: left center;
+    height: 36px;
+    width: 100px;
   }
   .nav-brand-logo.fom {
-    height: 32px;
-    width: 150px;
-    object-fit: contain;
-    object-position: left center;
-    transform: scale(1.06);
-    transform-origin: left center;
+    height: 34px;
+    width: auto;
+    max-width: 132px;
   }
   .nav-brand-divider {
     color: var(--text-soft);
     font-size: 14px;
     line-height: 1;
-    margin: 0 4px 0 0;
+    margin: 0 2px;
+    flex-shrink: 0;
   }
   .nav-links {
     display: flex;
-    gap: 12px;
-    list-style: none;
+    align-items: center;
+    justify-content: flex-start;
     flex: 1 1 auto;
-    justify-content: center;
+    gap: clamp(16px, 2vw, 28px);
+    list-style: none;
     min-width: 0;
     margin: 0;
     padding: 0;
   }
-  .nav-links a {
-    color: var(--text-soft);
-    text-decoration: none;
-    font-size: 10.5px;
-    font-weight: 500;
-    line-height: 1;
-    transition: color 180ms;
-    white-space: nowrap;
-  }
-  .nav-links a:hover { color: var(--text); }
-  .nav-cta {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--text);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 10.5px;
-    padding: 7px 10px;
-    border-radius: var(--radius-pill);
-    transition: background 160ms;
-    white-space: nowrap;
+  .nav-links li {
     flex: 0 0 auto;
   }
-  .nav-cta:hover { background: #FFC22E; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    padding: 8px 2px;
+    transition: color 160ms ease;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--orange-ring); }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--orange-ring);
+    color: var(--text-on-orange);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.2;
+    padding: 11px 20px;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(30, 34, 85, 0.12);
+    box-shadow: none;
+    transition: background 160ms ease, filter 160ms ease;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+  .nav-cta:hover {
+    filter: brightness(0.97);
+  }
 
   /* --- LAYOUT --- */
   .container {
+    width: 100%;
     max-width: var(--page-max);
-    margin: 0 auto;
-    padding: 0 var(--page-gutter);
+    margin-inline: auto;
+    padding-inline: var(--page-gutter);
+    box-sizing: border-box;
   }
   section {
     padding: 36px 0;
@@ -169,20 +219,23 @@
   }
   section.tight { padding: 32px 0; }
   .section-eyebrow {
-    display: inline-block;
-    font-size: 15px;
+    display: block;
+    font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0;
+    letter-spacing: 0.01em;
     text-transform: none;
-    color: var(--text-soft);
-    margin-bottom: 12px;
+    color: var(--text-muted);
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 10px;
   }
   .section-title {
-    font-size: 34px;
-    font-weight: 500;
-    line-height: 1.18;
-    letter-spacing: -0.02em;
-    margin-bottom: 10px;
+    font-size: clamp(28px, 3.2vw, 36px);
+    font-weight: 600;
+    line-height: 1.16;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
     max-width: none;
     text-wrap: pretty;
     text-align: left;
@@ -203,80 +256,81 @@
 
   /* --- HERO --- */
   .hero {
-    overflow: hidden;
-    padding: 56px 0 64px;
-    background: var(--bg);
+    padding: 48px 0 56px;
+    background: var(--ivory);
   }
-  .hero::before {
-    display: none;
-  }
-  .hero-inner {
-    position: relative;
-    z-index: 1;
-    max-width: none;
-    margin: 0;
-  }
-  /* First screen uses the same optical left axis as following section */
-  .hero .container {
-    padding-left: calc(var(--page-gutter) + 118px);
-    padding-right: var(--page-gutter);
+  .hero .section-eyebrow {
+    margin-bottom: 12px;
+    font-size: 14px;
   }
   .hero h1 {
-    font-size: 42px;
-    font-weight: 500;
-    line-height: 1.14;
-    letter-spacing: -0.02em;
-    margin-bottom: 18px;
-    max-width: 19ch;
+    font-size: clamp(34px, 4.8vw, 52px);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    margin-bottom: 20px;
+    max-width: 22ch;
+    color: var(--text);
   }
   .hl {
-    background: var(--block);
+    background: var(--ivory);
     padding: 0 8px;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
   }
   .hero-lede {
-    font-size: 20px;
-    line-height: 1.5;
-    color: var(--text);
-    max-width: 60ch;
-    margin-bottom: 36px;
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.55;
+    color: var(--text-muted);
+    max-width: 46ch;
+    margin-bottom: 28px;
   }
-  .hero-lede b { font-weight: 700; }
+  .hero-lede b { font-weight: 700; color: var(--text); }
   .hero-cta-row {
     display: flex;
-    gap: 12px;
+    gap: 14px;
     flex-wrap: wrap;
+    align-items: center;
   }
   .btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--accent);
-    color: var(--text);
+    background: var(--orange-ring);
+    color: var(--text-on-orange);
     text-decoration: none;
     font-weight: 600;
-    font-size: 15px;
-    padding: 14px 24px;
+    font-size: 16px;
+    padding: 16px 28px;
     border-radius: var(--radius-pill);
-    transition: background 160ms, transform 160ms;
+    border: none;
+    box-shadow: none;
+    transition: background 160ms, filter 160ms;
   }
-  .btn-primary:hover { background: #FFC22E; transform: translateY(-1px); }
+  .btn-primary:hover {
+    background: var(--orange);
+    filter: brightness(0.98);
+  }
   .btn-ghost {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: transparent;
+    background: #fff;
     color: var(--text);
     text-decoration: none;
     font-weight: 600;
-    font-size: 15px;
-    padding: 14px 24px;
+    font-size: 16px;
+    padding: 16px 28px;
     border-radius: var(--radius-pill);
-    border: 1.5px solid rgba(34, 38, 59, 0.24);
-    transition: background 180ms, color 180ms;
+    border: 2px solid rgba(30, 34, 85, 0.22);
+    box-shadow: none;
+    transition: background 180ms, border-color 180ms, color 180ms;
   }
-  .btn-ghost:hover { background: var(--bg-soft); color: var(--text); border-color: var(--text); }
+  .btn-ghost:hover {
+    background: #fff;
+    border-color: var(--orange-ring);
+    color: var(--text);
+  }
 
   /* --- MANIFESTO --- */
   .manifest p {
@@ -293,19 +347,115 @@
     line-height: 1.3;
   }
   .manifest .gov-quote {
-    margin-top: 28px;
-    padding: 20px 22px;
-    background: var(--bg-soft);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--line);
-    font-size: 15px;
-    line-height: 1.55;
-    color: var(--text);
-    max-width: 860px;
+    margin-top: 32px;
+    max-width: none;
     display: grid;
-    grid-template-columns: 1fr 250px;
-    gap: 16px;
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) minmax(120px, 168px);
+    gap: 28px 32px;
+    align-items: center;
+    padding: 36px 40px;
+    background: var(--ivory);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .manifest .gov-quote::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+    background: var(--energy);
+  }
+  .gov-quote__body {
+    min-width: 0;
+    padding-left: 8px;
+  }
+  .gov-quote__text {
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.5;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .gov-quote__text::before {
+    content: '«';
+    color: var(--energy);
+    font-weight: 700;
+    margin-right: 4px;
+  }
+  .gov-quote__meta {
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .gov-quote__meta a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--text-soft);
+  }
+  .gov-quote__person b {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .gov-quote__person span {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .gov-quote__visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 0;
+    padding: 0;
+    background: transparent;
+  }
+  .gov-portrait {
+    width: min(168px, 100%);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--dominant);
+    flex-shrink: 0;
+  }
+  .gov-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 12%;
+    display: block;
+  }
+  #what-researches {
+    background: var(--bg);
+  }
+  #data {
+    background: var(--bg);
+  }
+  #data-moscow {
+    background: var(--ivory);
+  }
+  #report-example {
+    background: var(--bg);
+  }
+  #value {
+    background: var(--ivory);
+  }
+  #problem {
+    background: var(--bg);
+  }
+  #partners {
+    background: var(--bg);
+  }
+  #cta {
+    background: var(--ivory);
+    border-top: 1px solid var(--line-strong);
   }
   #problem .section-title {
     max-width: 46ch;
@@ -315,85 +465,20 @@
     max-width: none;
   }
   #problem .manifest .gov-quote {
-    margin-top: 18px;
-    max-width: none;
-  }
-  .manifest .gov-quote .quote-main { min-width: 0; }
-  .manifest .gov-quote .quote-text {
-    position: relative;
-    margin-bottom: 10px;
-    padding-left: 18px;
-  }
-  .manifest .gov-quote .quote-text::before {
-    content: "«";
-    position: absolute;
-    left: 0;
-    top: -2px;
-    font-size: 26px;
-    line-height: 1;
-    color: var(--text-muted);
-  }
-  .manifest .gov-quote p {
-    margin-bottom: 10px;
-    font-size: 14.5px;
-    line-height: 1.55;
-  }
-  .manifest .gov-quote p:last-child { margin-bottom: 0; }
-  .manifest .gov-quote b { font-weight: 700; }
-  .manifest .gov-quote .quote-meta {
-    color: var(--text-muted);
-    font-size: 12.5px;
-  }
-  .manifest .gov-quote .quote-author {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
-  }
-  .manifest .gov-quote .quote-photo {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-    border: 1px solid var(--line);
-  }
-  .manifest .gov-quote .quote-person {
-    font-size: 13.5px;
-    color: var(--text);
-    line-height: 1.35;
-  }
-  .manifest .gov-quote .quote-person span {
-    display: block;
-    color: var(--text-muted);
-    font-size: 12.5px;
-  }
-  .manifest .gov-quote a {
-    color: var(--text);
-    text-decoration: none;
-    border-bottom: 1px solid var(--text-soft);
+    margin-top: 0;
   }
   @media (max-width: 860px) {
-    #problem .manifest .gov-quote { margin-top: 12px; }
     .manifest .gov-quote {
       grid-template-columns: 1fr;
-      padding: 18px;
-      gap: 12px;
+      padding: 28px 24px 24px;
+      gap: 24px;
     }
-    .manifest .gov-quote .quote-author {
-      flex-direction: row;
-      justify-content: flex-start;
-      text-align: left;
-      gap: 10px;
+    .gov-quote__visual {
+      order: -1;
     }
-    .manifest .gov-quote .quote-photo {
-      width: 52px;
-      height: 52px;
+    .gov-portrait {
+      max-width: 160px;
+      margin: 0 auto;
     }
   }
 
@@ -404,14 +489,24 @@
     gap: 14px;
   }
   .metric-card {
-    background: var(--bg-soft);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    background: #fff;
     border-radius: var(--radius-lg);
     padding: 24px 24px 22px;
-    border-top: 3px solid var(--block);
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--dominant);
+    box-shadow: var(--shadow-soft);
   }
-  .metric-card.alt { border-top-color: var(--orange); }
-  .metric-card.alt2 { border-top-color: var(--grey-d); }
+  .metric-card.alt { border-top-color: var(--energy); }
+  .metric-card.alt2 { border-top-color: var(--info); }
   .metric-num {
+    display: flex;
+    align-items: baseline;
+    flex-shrink: 0;
+    min-height: 46px;
     font-size: 42px;
     font-weight: 600;
     letter-spacing: -1.4px;
@@ -425,13 +520,17 @@
     margin-left: 4px;
   }
   .metric-label {
+    flex: 1 1 auto;
     font-size: 13.5px;
     line-height: 1.45;
     color: var(--text);
+    margin: 0;
   }
   .metric-tag {
-    display: inline-block;
-    margin-top: 12px;
+    display: block;
+    flex-shrink: 0;
+    margin-top: auto;
+    padding-top: 12px;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0;
@@ -444,62 +543,71 @@
     gap: 24px;
     align-items: start;
   }
-  #data .section-title { margin-bottom: 8px; max-width: none; }
-  #data .section-sub {
+  #data .section-title,
+  #data-moscow .section-title { margin-bottom: 8px; max-width: none; }
+  #data .section-sub,
+  #data-moscow .section-sub {
     margin-bottom: 14px;
     max-width: none;
   }
   #what-researches .section-sub { max-width: none; }
-  #data .metrics-row {
+  #data .metrics-row,
+  #data-moscow .metrics-row {
     gap: 12px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
     max-width: none;
     margin: 0;
   }
-  #data .metric-card {
+  #data .metric-card,
+  #data-moscow .metric-card {
     padding: 18px 20px 16px;
     background: #fff;
     border: 1px solid var(--line);
     border-top: 3px solid var(--block);
   }
-  #data .metric-num {
+  #data-moscow .metric-card {
+    border-top-color: var(--energy);
+  }
+  #data .metric-num,
+  #data-moscow .metric-num {
     font-size: 38px;
+    min-height: 42px;
     margin-bottom: 8px;
   }
-  #data .metric-tag { margin-top: 8px; }
-  #data .insight-box {
-    margin-top: 16px;
-    padding: 18px 20px;
-    max-width: none;
+  #data .metric-tag,
+  #data-moscow .metric-tag {
+    margin-top: auto;
+    padding-top: 10px;
+  }
+  #data .conclusion-card,
+  #data-moscow .conclusion-card { margin-top: 16px; }
+  .conclusion-card {
+    margin-top: 24px;
+    border: 2px solid var(--navy);
+    border-radius: var(--radius-xl);
+    padding: 36px 40px;
+    background: #fff;
     width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+    max-width: none;
+    box-shadow: 0 4px 24px rgba(30, 34, 85, 0.07);
   }
-  .data-foot {
-    margin-top: 22px;
+  .conclusion-card__label {
     font-size: 13px;
-    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--energy);
   }
-  .insight-box {
-    margin-top: 32px;
-    border: 1.5px solid var(--accent);
-    border-radius: var(--radius-lg);
-    padding: 22px 26px;
-    background: var(--bg);
-    max-width: 800px;
-  }
-  .insight-box-title {
-    font-weight: 600;
-    font-size: 15px;
-    margin-bottom: 6px;
-  }
-  .insight-box p {
-    font-size: 14.5px;
+  .conclusion-card p {
+    font-size: 16px;
     line-height: 1.55;
-    color: var(--text);
+    color: var(--navy);
     max-width: none;
     margin: 0;
   }
+  .conclusion-card p b { font-weight: 700; }
   .key-visual-grid {
     display: grid;
     grid-template-columns: 1.25fr 1fr;
@@ -579,7 +687,7 @@
     position: absolute;
     left: 0; top: 8px;
     width: 5px; height: 5px;
-    background: var(--text);
+    background: var(--orange-ring);
     border-radius: 50%;
   }
   .b .b-note {
@@ -633,7 +741,9 @@
   .method-note {
     margin-top: 22px;
     padding: 18px 22px;
-    background: var(--bg-soft);
+    background: var(--ivory);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--info-light);
     border-radius: var(--radius-md);
     font-size: 14.5px;
     color: var(--text);
@@ -642,17 +752,1230 @@
   }
   .method-note b { font-weight: 700; }
 
-  /* --- REPORT EXAMPLE — pages mocked as FOM-style report pages --- */
-  .report-pages {
+  /* --- REPORT CAROUSEL (стрелки по бокам, один экран) --- */
+  .report-carousel {
+    position: relative;
+    margin-top: 8px;
+    --report-carousel-offset: 11rem;
+    --report-carousel-h: clamp(280px, calc(100svh - var(--report-carousel-offset)), 620px);
+    --rep-bench-bg: rgba(255, 214, 102, 0.28);
+    --rep-bench-accent: var(--dominant);
+  }
+  #report-example .section-title {
+    margin-bottom: 12px;
+  }
+  .report-carousel__stage {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+  }
+  .report-carousel__frame {
+    min-width: 0;
     display: flex;
     flex-direction: column;
+    gap: 6px;
+  }
+  .report-carousel__viewport {
+    height: var(--report-carousel-h);
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+  .report-carousel__track {
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  .report-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: var(--report-carousel-h);
+    padding: 10px 14px 12px;
+    border-top: 4px solid var(--yellow-deep);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .report-slide-intro {
+    flex: 0 0 auto;
+    min-height: 0;
+    max-height: 4.5rem;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .report-slide .report-page-tag {
+    margin-bottom: 2px;
+    font-size: 9px;
+  }
+  .report-slide .report-page-title {
+    font-size: 15px;
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+  .report-slide .report-value-bullet {
+    font-size: 12px;
+    line-height: 1.3;
+    margin-bottom: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .report-slide-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .report-slide-chart {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+  }
+  .report-carousel__btn {
+    border: 2px solid rgba(30, 34, 85, 0.18);
+    background: #fff;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+    flex-shrink: 0;
+  }
+  .report-carousel__btn--side {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 400;
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(30, 34, 85, 0.08);
+  }
+  .report-carousel__btn--side:hover:not(:disabled) {
+    background: var(--dominant);
+    border-color: var(--orange-ring);
+    color: var(--text);
+    box-shadow: 0 4px 16px rgba(30, 34, 85, 0.12);
+  }
+  .report-carousel__btn:hover:not(:disabled) {
+    border-color: var(--orange-ring);
+    color: var(--orange-ring);
+  }
+  .report-carousel__btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  .report-carousel__counter {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.3;
+  }
+  .report-slide-chart {
+    min-width: 0;
+  }
+  .report-slide-chart .report-panel {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px 18px 18px;
+    background: var(--ivory);
+    border: 1px solid var(--line-strong);
+  }
+  .report-slide-chart .report-panel.report-panel--index,
+  .report-slide-chart .report-panel.report-panel--symptoms,
+  .report-slide-chart .report-panel.report-panel--social,
+  .report-slide-chart .report-panel.report-panel--stress,
+  .report-slide-chart .report-panel.report-panel--professional,
+  .report-slide-chart .report-panel.report-panel--personal {
+    justify-content: flex-start;
+    padding: 10px 12px 12px;
+    background: var(--ivory);
+  }
+  .report-slide-body--index {
+    display: block;
+  }
+  .report-index-panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--ivory);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .report-slide--index .report-value-card--index-top {
+    flex-shrink: 0;
+    min-height: 0;
+    padding: 18px 22px 16px;
+    margin: 0;
+    background: var(--ivory);
+    border: none;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 20px;
+    row-gap: 4px;
+    align-items: center;
+    justify-items: start;
+    text-align: left;
+  }
+  .report-slide--index .report-value-card--index-top .report-value-label {
+    grid-column: 1 / -1;
+    margin-bottom: 2px;
+  }
+  .report-slide--index .report-value-card--index-top .report-value-num {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    font-size: clamp(40px, 5vw, 56px);
+  }
+  .report-slide--index .report-value-card--index-top .report-value-text {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: none;
+    margin: 0;
+    align-self: center;
+  }
+  .report-slide--index .report-panel.report-panel--index {
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    background: var(--ivory);
+    padding: 14px 22px 20px;
+  }
+  .fom-slide-stress {
+    width: 100%;
+    font-size: 12px;
+    color: var(--text);
+  }
+  .fom-slide-stress__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .fom-slide-stress__title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .fom-slide-stress__unit {
+    font-size: 11px;
+    font-style: italic;
+    color: #8a909c;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+  .fom-stress-matrix {
+    position: relative;
+  }
+  .fom-stress-matrix__head,
+  .fom-stress-row-panel {
+    display: grid;
+    grid-template-columns: var(--stress-cols, minmax(176px, 1.32fr) repeat(4, minmax(68px, 1fr)));
+    column-gap: 0;
+    align-items: stretch;
+  }
+  .fom-stress-matrix__head {
+    margin-bottom: 8px;
+  }
+  .fom-stress-matrix__corner {
+    grid-column: 1;
+  }
+  .fom-stress-matrix__h {
+    padding: 6px 8px 10px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    line-height: 1.3;
+    text-align: center;
+    border-left: 1px solid #e2e6ee;
+    position: relative;
+    z-index: 2;
+  }
+  .fom-stress-matrix__h--bench {
+    color: var(--navy);
+  }
+  .fom-stress-bench-outline {
+    position: absolute;
+    top: 2.4rem;
+    bottom: 1.3rem;
+    left: 24.8%;
+    width: 18.8%;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    z-index: 2;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
+  .fom-stress-row-panel {
+    background: #f4f5f8;
+    border: 1px solid #e2e6ee;
+    border-radius: 10px;
+    padding: 12px 0;
+    position: relative;
+    z-index: 1;
+  }
+  .fom-stress-row-panel + .fom-stress-row-panel {
+    margin-top: 10px;
+  }
+  .fom-stress-row-panel__aside {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 12px 0 14px;
+  }
+  .fom-stress-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 8px;
+    border-left: 1px solid #e2e6ee;
+    min-height: 48px;
+    position: relative;
+    z-index: 1;
+  }
+  .fom-stress-q {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .fom-stress-q__mark {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+  }
+  .fom-stress-q__text {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.38;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .fom-stress-matrix__legend {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 9px;
+    line-height: 1.35;
+    color: #6b7280;
+  }
+  .fom-stress-matrix__legend span {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .fom-stress-matrix__legend i {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .fom-stress-matrix__legend i.dark {
+    background: var(--navy);
+  }
+  .fom-stress-matrix__legend i.light {
+    background: #8eb0d8;
+  }
+  .fom-stress-matrix__legend i.mid {
+    background: #c5cad4;
+  }
+  .fom-slide-stress .rbar--fom-stress {
+    width: 100%;
+    height: 34px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: #e8ebf0;
+  }
+  .fom-slide-stress .rbar--fom-stress .rbar__seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    min-width: 1.6em;
+  }
+  .fom-slide-stress .rbar--fom-stress .rbar__seg.dark {
+    background: var(--navy);
+    color: #fff;
+  }
+  .fom-slide-stress .rbar--fom-stress .rbar__seg.light {
+    background: #8eb0d8;
+    color: #fff;
+  }
+  .fom-slide-stress .rbar--fom-stress .rbar__seg.mid {
+    background: #d0d5de;
+    color: #5c6370;
+    font-size: 9px;
+  }
+  .fom-stress-foot {
+    margin: 10px 0 0;
+    font-size: 10px;
+    line-height: 1.4;
+    color: #8a909c;
+  }
+  @media (max-width: 760px) {
+    .report-slide--stress .report-slide-body {
+      grid-template-columns: 1fr;
+    }
+    .report-slide--stress .report-panel {
+      min-width: 520px;
+    }
+    .fom-stress-q__text {
+      font-size: 10px;
+    }
+  }
+  .report-slide-chart .report-panel .factor-chart__rows {
+    flex: 1;
+  }
+  .imb-panel--dist {
+    margin-bottom: 14px;
+  }
+  .imb-dist-stack {
+    display: flex;
+    height: 28px;
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    margin-bottom: 12px;
+  }
+  .imb-dist-stack__seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--navy);
+    min-width: 2em;
+  }
+  .imb-dist-stack__seg--low { background: #ffe9a8; }
+  .imb-dist-stack__seg--mid { background: var(--dominant); }
+  .imb-dist-stack__seg--high { background: var(--navy); color: #fff; }
+  .imb-dist-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--text);
+  }
+  .imb-dist-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .imb-dist-legend i {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .imb-dist-legend i.low { background: #ffe9a8; }
+  .imb-dist-legend i.mid { background: var(--dominant); }
+  .imb-dist-legend i.high { background: var(--navy); }
+  .imb-panel--types .imb-scale-chart {
+    gap: 8px;
+  }
+  .factor-chart--symptoms .factor-row {
+    padding: 8px 0;
+  }
+  .factor-chart--symptoms .factor-row__label {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  .factor-chart--symptoms .factor-bar-wrap {
+    height: 26px;
+  }
+  .fom-chart-heading {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: none;
+    color: var(--text);
+    margin: 0 0 14px;
+    line-height: 1.3;
+  }
+  .imb-dashboard {
+    width: 100%;
+    font-size: 12px;
+    color: var(--text);
+  }
+  .imb-dashboard__region {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .imb-dashboard__top {
+    display: grid;
+    grid-template-columns: minmax(130px, 0.34fr) minmax(0, 0.66fr);
     gap: 14px;
+    margin-bottom: 14px;
+    align-items: start;
+  }
+  .imb-dashboard__side {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+  }
+  .imb-panel {
+    background: #fff;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    padding: 14px 14px 16px;
+    min-width: 0;
+  }
+  .imb-panel__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .imb-panel__title {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--text);
+  }
+  .imb-panel__unit {
+    font-size: 10px;
+    font-style: italic;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .imb-index-block {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    min-height: 140px;
+  }
+  .imb-index-num {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+  .imb-vbar {
+    display: flex;
+    align-items: stretch;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+    justify-content: flex-end;
+  }
+  .imb-vbar__axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 10px;
+    line-height: 1;
+    color: var(--text-muted);
+    padding: 0 0 2px;
+    height: 128px;
+  }
+  .imb-vbar__track {
+    position: relative;
+    width: 32px;
+    height: 128px;
+    background: #e8ebf0;
+    border: 1px solid rgba(30, 34, 85, 0.18);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .imb-vbar__track .imb-grid-line--h {
+    z-index: 2;
+  }
+  .imb-vbar__fill {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: var(--energy);
+    border: none;
+    box-shadow: none;
+    border-radius: 4px 4px 0 0;
+    min-height: 2px;
+    z-index: 1;
+  }
+  .imb-vdotplot {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 8px;
+    align-items: stretch;
+  }
+  .imb-vdotplot__yaxis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 10px;
+    line-height: 1;
+    color: var(--text-muted);
+    padding: 0 0 52px;
+    height: 148px;
+    box-sizing: border-box;
+  }
+  .imb-vdotplot__main {
+    position: relative;
+    min-width: 0;
+  }
+  .imb-vdotplot__grid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 128px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .imb-vdotplot__hline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--line);
+  }
+  .imb-vdotplot__hline--zero {
+    height: 2px;
+    background: rgba(30, 34, 85, 0.28);
+  }
+  .imb-vdotplot__cols {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(var(--vdot-cols, 3), minmax(0, 1fr));
+    gap: 8px;
+    padding-top: 0;
+  }
+  .imb-vdotplot--inds .imb-vdotplot__cols {
+    --vdot-cols: 7;
+    gap: 6px;
+  }
+  .imb-vdotplot:not(.imb-vdotplot--inds) .imb-vdotplot__cols {
+    --vdot-cols: 3;
+  }
+  .imb-vdotplot__col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+  }
+  .imb-vdotplot__col-plot {
+    position: relative;
+    width: 100%;
+    height: 128px;
+  }
+  .imb-vdotplot__marker {
+    position: absolute;
+    left: 50%;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transform: translate(-50%, 50%);
+    z-index: 2;
+    white-space: nowrap;
+  }
+  .imb-vdotplot__dot {
+    display: block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--energy);
+    border: none;
+    box-shadow: none;
+    flex-shrink: 0;
+  }
+  .imb-vdotplot__val {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  .imb-vdotplot__cat {
+    margin-top: 8px;
+    font-size: 10px;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--text);
+    max-width: 100%;
+  }
+  .imb-vdotplot__cat--compact {
+    font-size: 9px;
+    line-height: 1.25;
+  }
+  .report-panel--index .imb-dashboard {
+    width: 100%;
+  }
+  .report-panel--index {
+    padding: 16px 18px 18px;
+    background: var(--ivory);
+  }
+  .report-panel--index .imb-panel {
+    background: #fff;
+  }
+  .report-panel--index .imb-panel__title {
+    color: var(--text);
+    font-size: 10px;
+  }
+  .report-panel--index .imb-panel--main-index {
+    background: var(--rep-bench-bg);
+    box-shadow: inset 3px 0 0 var(--rep-bench-accent);
+  }
+  .imb-grid-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--line);
+    pointer-events: none;
+  }
+  .imb-grid-line--h {
+    top: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 1px;
+  }
+  .imb-grid-line--zero {
+    background: rgba(30, 34, 85, 0.28);
+  }
+  .imb-scale-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .imb-scale-chart--inds {
+    gap: 10px;
+  }
+  .imb-panel__scale-note {
+    margin: 0 0 12px;
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+  .imb-panel__scale-note b {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .imb-scale-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+  }
+  .imb-scale-axis {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    padding: 0 1px;
+  }
+  .imb-scale-axis__zero {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .imb-scale-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: 12px 14px;
+    align-items: start;
+  }
+  .imb-panel--subs .imb-scale-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  }
+  .imb-scale-row__label {
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--text);
+  }
+  .imb-scale-row__label--compact {
+    font-size: 10px;
+    line-height: 1.3;
+  }
+  .imb-scale-track {
+    position: relative;
+    height: 28px;
+    background: #fff;
+    border: 1px solid rgba(30, 34, 85, 0.22);
+    border-radius: var(--radius-pill);
+    box-sizing: border-box;
+  }
+  .imb-scale-chart--inds .imb-scale-track {
+    height: 26px;
+  }
+  .imb-scale-track .imb-grid-line {
+    top: 4px;
+    bottom: 4px;
+  }
+  .imb-scale-track .imb-grid-line--zero {
+    width: 2px;
+    background: rgba(30, 34, 85, 0.35);
+  }
+  .imb-scale-marker {
+    position: absolute;
+    top: 50%;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  .imb-scale-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--energy);
+    flex-shrink: 0;
+  }
+  .imb-scale-val {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+  .factor-chart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .report-carousel .factor-chart__tag {
+    display: none;
+  }
+  .factor-chart__tag {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .factor-chart__region {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .factor-chart__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .factor-chart--stress .factor-chart__rows {
+    gap: 0;
+  }
+  .factor-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(140px, 0.85fr);
+    gap: 14px 16px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .factor-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .factor-row:first-child {
+    padding-top: 0;
+  }
+  .factor-row--stress {
+    border-bottom: none;
+    padding: 0;
+  }
+  .factor-row__label {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text);
+  }
+  .factor-row__meta {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+  .factor-bar-wrap {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    height: 32px;
+    padding: 3px;
+    background: #fff;
+    border: 2px solid var(--text);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .factor-bar-wrap--pair {
+    height: 36px;
+  }
+  .factor-bar-wrap--pair .rbar {
+    height: 100%;
+    border-radius: var(--radius-pill);
+    background: transparent;
+  }
+  .factor-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    max-width: 100%;
+    height: 100%;
+    background: var(--energy);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .factor-bar--narrow span {
+    font-size: 9px;
+  }
+  .factor-bar span {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-on-orange);
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .factor-chart__note,
+  .factor-chart__legend {
+    margin-top: 14px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+  .factor-chart--matrix {
+    --matrix-cols: minmax(148px, 1.15fr) repeat(4, minmax(62px, 1fr));
+    font-size: 12px;
+  }
+  .factor-chart--matrix .matrix-chart__table {
+    position: relative;
+    margin-top: 6px;
+    background: #fff;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    padding: 12px 12px 10px;
+  }
+  .factor-chart--matrix .matrix-chart__head,
+  .factor-chart--matrix .matrix-chart__row {
+    display: grid;
+    grid-template-columns: var(--matrix-cols);
+    align-items: stretch;
+  }
+  .factor-chart--matrix .matrix-chart__head {
+    margin-bottom: 6px;
+  }
+  .factor-chart--matrix .matrix-chart__h {
+    padding: 6px 8px 8px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--text);
+    line-height: 1.3;
+    text-align: center;
+    border-left: 1px solid var(--line);
+  }
+  .factor-chart--matrix .matrix-chart__h--bench {
+    color: var(--text);
+    font-weight: 800;
+    background: var(--rep-bench-bg);
+    box-shadow: inset 3px 0 0 var(--rep-bench-accent);
+    border-radius: 6px 6px 0 0;
+  }
+  .factor-chart--matrix .matrix-chart__body {
+    position: relative;
+    z-index: 1;
+  }
+  .factor-chart--matrix .matrix-chart__block--spaced {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+  }
+  .factor-chart--matrix .matrix-chart__section-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    color: var(--text);
+    margin: 0 0 6px;
+  }
+  .factor-chart--matrix .matrix-chart__question {
+    margin: 0 0 10px;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .factor-chart--matrix .matrix-chart__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    margin-bottom: 10px;
+    font-size: 10px;
+    line-height: 1.35;
+    color: var(--text-muted);
+  }
+  .factor-chart--matrix .matrix-chart__legend span {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .matrix-legend__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .matrix-legend__dot--yes { background: var(--dominant); }
+  .matrix-legend__dot--no { background: var(--energy); }
+  .matrix-legend__dot--dk { background: #c5cad4; }
+  .factor-chart--matrix .matrix-chart__rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .factor-chart--matrix .matrix-chart__row {
+    border-top: 1px solid var(--line);
+  }
+  .factor-chart--matrix .matrix-chart__row:nth-child(even) {
+    background: rgba(30, 34, 85, 0.025);
+  }
+  .factor-chart--matrix .matrix-chart__row:first-child {
+    border-top: none;
+  }
+  .factor-chart--matrix .matrix-chart__label {
+    padding: 8px 10px 8px 0;
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--text);
+    grid-column: 1;
+  }
+  .factor-chart--matrix .matrix-chart__cell {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    border-left: 1px solid var(--line);
+    min-height: 40px;
+  }
+  .factor-chart--matrix .matrix-chart__cell--bench {
+    background: var(--rep-bench-bg);
+    box-shadow: inset 3px 0 0 var(--rep-bench-accent);
+  }
+  /* Единый стековый бар: одна «пилюля», сегменты внутри без зазоров (как дорожка на слайде 3) */
+  .factor-chart--matrix .matrix-bar--stacked {
+    width: 100%;
+    height: 30px;
+  }
+  .factor-chart--matrix .matrix-bar--stacked .matrix-bar__track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    background: #eef0f4;
+    border: 1px solid rgba(30, 34, 85, 0.12);
+    box-sizing: border-box;
+  }
+  .factor-chart--matrix .matrix-bar--stacked .matrix-bar__seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    min-width: 0;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+  }
+  .factor-chart--matrix .matrix-bar--stacked .matrix-bar__seg + .matrix-bar__seg {
+    box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.45);
+  }
+  .factor-chart--matrix .matrix-bar__pct {
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .factor-chart--matrix .matrix-bar__seg--yes {
+    background: var(--dominant);
+  }
+  .factor-chart--matrix .matrix-bar__seg--yes .matrix-bar__pct {
+    color: var(--navy);
+  }
+  .factor-chart--matrix .matrix-bar__seg--no {
+    background: var(--energy);
+  }
+  .factor-chart--matrix .matrix-bar__seg--no .matrix-bar__pct {
+    color: #fff;
+  }
+  .factor-chart--matrix .matrix-bar__seg--dk {
+    background: #d0d5de;
+  }
+  .factor-chart--matrix .matrix-bar__seg--dk .matrix-bar__pct {
+    color: #5c6370;
+    font-size: 9px;
+  }
+  /* Пропорциональные бары (слайд «Симптомы») — та же палитра, что и стеки */
+  .factor-chart--matrix .metric-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 6px;
+    align-items: center;
+    width: 100%;
+  }
+  .factor-chart--matrix .metric-bar__track,
+  .factor-chart--matrix .matrix-bar--stacked .matrix-bar__track {
+    height: 30px;
+    background: #eef0f4;
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    border: 1px solid rgba(30, 34, 85, 0.12);
+    box-sizing: border-box;
+  }
+  .factor-chart--matrix .metric-bar__fill {
+    display: block;
+    height: 100%;
+    border-radius: var(--radius-pill);
+    min-width: 2px;
+    background: var(--dominant);
+  }
+  .factor-chart--matrix .metric-bar__val {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    min-width: 1.5em;
+    text-align: right;
+  }
+  .factor-chart--matrix .metric-bar__val--zero {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--text-muted);
+  }
+  .factor-chart__note--foot {
+    margin-top: 8px;
+    font-size: 10px;
+    font-style: italic;
+  }
+  .report-slide--symptoms .report-panel,
+  .report-slide--professional .report-panel,
+  .report-slide--personal .report-panel,
+  .report-slide--social .report-panel {
+    min-height: 0;
+  }
+  .factor-chart__legend.report-legend {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+  .report-value-card {
+    border: 2px solid var(--text);
+    border-radius: var(--radius-md);
+    padding: 28px 20px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: none;
+    align-self: stretch;
+    height: auto;
+    min-height: 220px;
+    max-height: none;
+    box-sizing: border-box;
+  }
+  .report-value-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--orange-ring);
+    margin-bottom: 12px;
+  }
+  .report-value-num {
+    font-size: clamp(44px, 5.5vw, 64px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  .report-value-num .unit {
+    font-size: 0.45em;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-left: 2px;
+  }
+  .report-value-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text);
+    max-width: 28ch;
+  }
+  .report-value-text b {
+    font-weight: 700;
+    color: var(--text);
   }
   .report-page {
     background: #FFFFFF;
     border-radius: var(--radius-lg);
     padding: 20px 22px 20px;
-    border-top: 3px solid var(--block);
+    border-top: 4px solid var(--yellow-deep);
     box-shadow: none;
     border: 1px solid var(--line);
     overflow: hidden;
@@ -693,10 +2016,10 @@
     line-height: 1.55;
   }
   .report-page-foot b { color: var(--text); font-weight: 700; }
-  .report-page.symptoms-page { border-top-color: #FFDE7A; }
-  .report-page.symptoms-page .report-page-tag { color: #957735; }
-  .report-page.social-page { border-top-color: #FE741E; }
-  .report-page.social-page .report-page-tag { color: #CC5D18; }
+  .report-page.symptoms-page { border-top-color: var(--yellow); }
+  .report-page.symptoms-page .report-page-tag { color: var(--text); }
+  .report-page.social-page { border-top-color: var(--orange-ring); }
+  .report-page.social-page .report-page-tag { color: var(--orange-ring); }
 
   /* Page A: index + subindexes */
   .page-a-grid {
@@ -738,19 +2061,21 @@
     margin-bottom: 16px;
   }
   .report-toggle button {
-    border: 1px solid rgba(34, 38, 59, 0.24);
+    border: 1px solid rgba(30, 34, 85, 0.24);
     background: #fff;
     color: var(--text-muted);
     border-radius: var(--radius-pill);
     padding: 6px 12px;
-    font-size: 12px;
+    font-family: inherit;
+    font-size: 13px;
     font-weight: 600;
+    letter-spacing: 0;
     cursor: pointer;
   }
   .report-toggle button.active {
-    background: var(--accent);
-    color: var(--text);
-    border-color: var(--accent);
+    background: var(--orange-ring);
+    color: var(--text-on-orange);
+    border-color: var(--orange-ring);
   }
   .report-grid-2 {
     display: grid;
@@ -799,7 +2124,7 @@
     margin-top: 12px;
     padding: 14px 16px;
     border: 1px solid var(--line);
-    border-left: 4px solid var(--accent);
+    border-left: 4px solid var(--orange-ring);
     border-radius: var(--radius-md);
     background: #fff;
     font-size: 13px;
@@ -808,8 +2133,301 @@
   }
   .report-highlight b { font-weight: 700; }
 
+  .report-region-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .report-region-bar__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+  .report-value-bullet {
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--text);
+    margin: 0 0 12px;
+    padding-left: 18px;
+    position: relative;
+    max-width: 72ch;
+  }
+  .report-page-tag { margin-bottom: 6px; }
+  .report-page-title { margin-bottom: 6px; }
+  .report-value-bullet::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--orange-ring);
+  }
+  .report-panel {
+    background: var(--rep-panel);
+    border: 1px solid var(--rep-line);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+  }
+  .report-matrix {
+    display: grid;
+    gap: 8px;
+    font-size: 12px;
+    width: 100%;
+  }
+  .report-matrix-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) repeat(var(--cols, 1), minmax(72px, 1fr));
+    gap: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .report-matrix-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) repeat(var(--cols, 1), minmax(72px, 1fr));
+    gap: 8px;
+    align-items: center;
+  }
+  .report-matrix-label {
+    line-height: 1.35;
+    color: var(--text);
+    padding-right: 6px;
+  }
+  .report-matrix-cell {
+    background: #fff;
+    border: 1px solid var(--rep-line);
+    border-radius: 8px;
+    padding: 8px 10px 6px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+  }
+  .report-matrix-cell.is-bench {
+    border-color: var(--text);
+    border-width: 2px;
+  }
+  .rbar {
+    display: flex;
+    height: 24px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--rep-muted);
+    width: 100%;
+  }
+  .rbar__seg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    min-width: 2.8em;
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0 4px;
+    box-sizing: border-box;
+  }
+  .rbar__seg.dark { background: var(--rep-dark); }
+  .rbar__seg.mid { background: var(--rep-mid); color: var(--text); }
+  .rbar__seg.light { background: var(--rep-light); color: var(--text); font-weight: 600; }
+  .report-index-hero {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .report-index-hero__main { flex: 1; min-width: 0; }
+  .report-index-hero__tag {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .report-index-hero__cap {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .report-index-big {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--energy);
+  }
+  .report-index-scale {
+    position: relative;
+    height: 88px;
+    width: 22px;
+    flex-shrink: 0;
+    background: #fff;
+    border: 1px solid rgba(30, 34, 85, 0.22);
+    border-radius: 6px;
+  }
+  .report-index-scale__cap {
+    font-size: 9px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 6px;
+    line-height: 1.2;
+  }
+  .report-index-marker {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--rep-dark);
+    border: 2px solid #fff;
+  }
+  .report-chart-block {
+    margin-top: 10px;
+  }
+  .report-chart-block:first-of-type { margin-top: 0; }
+  .report-chart-block__title {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .report-compact-grid {
+    display: grid;
+    gap: 5px;
+  }
+  .report-compact-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(80px, 1.1fr) 40px;
+    gap: 8px;
+    align-items: center;
+    font-size: 11px;
+    line-height: 1.25;
+  }
+  .report-compact-label {
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .report-compact-track {
+    position: relative;
+    height: 6px;
+    background: var(--rep-muted);
+    border-radius: 3px;
+  }
+  .report-compact-dot {
+    position: absolute;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--rep-dark);
+    transform: translate(-50%, -50%);
+    border: 1.5px solid #fff;
+  }
+  .report-compact-val {
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--energy);
+    text-align: right;
+  }
+  .report-compact-val.is-neg { color: var(--text); }
+  .report-sub-chips {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .report-sub-chip {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 10px;
+    text-align: center;
+  }
+  .report-sub-chip span {
+    display: block;
+    font-size: 10px;
+    line-height: 1.3;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .report-sub-chip b {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--energy);
+    letter-spacing: -0.02em;
+  }
+  .report-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .report-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .report-legend i {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    display: inline-block;
+    font-style: normal;
+  }
+  .report-legend i.dark { background: var(--rep-dark); }
+  .report-legend i.light { background: var(--rep-light); }
+
   @media (max-width: 760px) {
     .report-page { padding: 22px 22px 26px; }
+    .report-carousel {
+      --report-carousel-offset: 9.5rem;
+      --report-carousel-h: clamp(260px, calc(100svh - var(--report-carousel-offset)), 520px);
+    }
+    .report-carousel__stage {
+      gap: 6px;
+    }
+    .report-carousel__btn--side {
+      width: 38px;
+      height: 38px;
+      font-size: 18px;
+    }
+    .report-slide-intro {
+      max-height: 4rem;
+    }
+    .report-slide { padding: 8px 10px 10px; }
+    .report-index-hero { flex-wrap: wrap; }
+    .report-sub-chips { grid-template-columns: 1fr; }
+    .report-compact-row {
+      grid-template-columns: minmax(0, 1fr) 40px;
+    }
+    .report-compact-track { display: none; }
+    .report-slide-chart .report-panel {
+      min-height: 0;
+      max-height: none;
+      padding: 16px 18px;
+    }
+    .factor-row { grid-template-columns: 1fr; gap: 8px; }
+    .imb-dashboard__top {
+      grid-template-columns: 1fr;
+    }
+    .imb-vdotplot--inds .imb-vdotplot__cat--compact {
+      font-size: 8px;
+    }
+    .report-value-card { padding: 22px 18px; }
     .page-a-grid { grid-template-columns: 1fr; }
     .page-a-index .big-num { font-size: 64px; }
     .report-page-title { font-size: 20px; }
@@ -867,7 +2485,7 @@
     max-width: 126px;
     height: 10px;
     margin: 0 auto 10px;
-    background: rgba(34, 38, 59, 0.1);
+    background: rgba(255, 165, 0, 0.22);
     border-radius: var(--radius-pill);
     position: relative;
     overflow: hidden;
@@ -880,8 +2498,8 @@
     background: var(--text);
     border-radius: var(--radius-pill);
   }
-  .addr-brush.soft .fill { background: #FFB800; }
-  .addr-brush.warn .fill { background: #FE741E; }
+  .addr-brush.soft .fill { background: var(--dominant); }
+  .addr-brush.warn .fill { background: var(--orange-ring); }
   .addr-subhead {
     font-size: 12px;
     font-weight: 600;
@@ -910,10 +2528,26 @@
   }
   #data .section-title,
   #data .section-sub,
+  #data-moscow .section-title,
+  #data-moscow .section-sub,
   #report-example .section-title,
-  #report-example .section-sub,
   #value .section-title,
   #value .section-sub { max-width: none; }
+  .what-researches__note {
+    margin: 22px 0 0;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--navy);
+    max-width: 62ch;
+  }
+  .what-researches__note b { font-weight: 700; }
+  .value-intro__lead {
+    margin: 14px 0 0;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 42ch;
+  }
   .addr-read-note {
     font-size: 15px;
     line-height: 1.5;
@@ -954,12 +2588,76 @@
     text-align: left;
   }
   .value-card {
-    background: var(--block);
+    background: #fff;
     border-radius: var(--radius-md);
     padding: 22px 22px 24px;
+    border: 1px solid rgba(30, 34, 85, 0.14);
+    box-shadow: var(--shadow-soft);
   }
-  .value-card.soft { background: var(--block-soft); }
-  .value-card.lightest { background: var(--block-lightest); }
+  .value-card.soft,
+  .value-card.lightest { background: #fff; }
+  .value-card--wide {
+    grid-column: 1 / -1;
+  }
+  .value-card__lead {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin: 0 0 4px;
+  }
+  .np-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .np-pill {
+    appearance: none;
+    border: 1.5px solid var(--text);
+    border-radius: var(--radius-pill);
+    padding: 8px 14px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    background: #fff;
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .np-pill:hover {
+    border-color: var(--orange-ring);
+    color: var(--orange-ring);
+  }
+  .np-pill.is-active {
+    background: var(--text);
+    border-color: var(--text);
+    color: #fff;
+  }
+  .np-pill.is-active:hover {
+    color: #fff;
+  }
+  .np-pill-panels {
+    margin-top: 14px;
+  }
+  .np-pill-panel {
+    display: none;
+    font-size: 14px;
+    line-height: 1.52;
+    color: var(--text);
+    padding: 14px 16px;
+    background: var(--ivory);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+  }
+  .np-pill-panel.is-active { display: block; }
+  .np-pill-panel h5 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+  .np-pill-panel p { margin: 0; }
   .value-num {
     font-size: 13px;
     font-weight: 700;
@@ -981,20 +2679,11 @@
     max-width: none;
     margin: 0;
   }
-.value-callout {
-  margin-top: 18px;
-  padding: 16px 20px;
-  border: 1.5px solid var(--line-strong);
-  border-radius: var(--radius-md);
-  background: var(--bg-soft);
-  font-size: 15px;
-  line-height: 1.5;
-}
-.value-callout b { font-weight: 700; }
   .partners-brief {
-    background: var(--bg-soft);
+    background: var(--ivory);
     border-radius: var(--radius-lg);
     padding: 22px 24px;
+    border: 1px solid var(--line);
   }
   .partners-brief-grid {
     display: grid;
@@ -1040,6 +2729,50 @@
     color: var(--text-soft);
     line-height: 1.4;
   }
+  .method-brief {
+    margin-bottom: 28px;
+    padding: 22px 24px 20px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--orange-ring);
+    box-shadow: var(--shadow-soft);
+  }
+  .method-brief__title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .method-brief__lead {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text);
+    margin: 0 0 18px;
+    max-width: 72ch;
+  }
+  .method-brief__lead b { font-weight: 700; }
+  .method-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 18px;
+    max-width: 72ch;
+  }
+  .method-body p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+  .method-body p b { color: var(--text); font-weight: 700; }
+  .partners-subhead {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
 
   /* --- ECOSYSTEM --- */
   .eco-intro {
@@ -1054,11 +2787,14 @@
 
   /* --- CTA / FOOTER ROW --- */
   .cta-section {
-    background: var(--bg-soft);
-    border-radius: 16px;
-    padding: 30px 30px 30px;
+    background: #fff;
+    border-radius: var(--radius-xl);
+    padding: 36px 36px 40px;
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--line);
+    border-top: 6px solid var(--energy);
+    box-shadow: var(--shadow-soft);
   }
   .cta-section .brush { z-index: 0; }
   .footer-row {
@@ -1098,43 +2834,177 @@
     margin-bottom: 14px;
     letter-spacing: -0.2px;
   }
-  .cta-contact {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 6px;
+  .cta-channel {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    max-width: 52ch;
   }
-  .cta-contact a {
+  .cta-channel a {
     color: var(--text);
+    font-weight: 600;
     text-decoration: none;
     border-bottom: 1.5px solid var(--accent);
   }
-  .cta-contact .sep { color: var(--text-soft); margin: 0 8px; }
-  .cta-secondary {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-top: 8px;
+  .cta-lead-panel {
+    margin-top: 22px;
+    max-width: 520px;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
   }
-  .cta-secondary a {
+  .cta-lead-panel summary {
+    font-size: 16px;
+    font-weight: 600;
     color: var(--text);
-    text-decoration: none;
-    border-bottom: 1px solid var(--text-soft);
+    cursor: pointer;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
+  .cta-lead-panel summary::-webkit-details-marker { display: none; }
+  .cta-lead-panel summary::after {
+    content: '›';
+    font-size: 18px;
+    color: var(--orange-ring);
+    transition: transform 0.15s;
+  }
+  .cta-lead-panel[open] summary::after { transform: rotate(90deg); }
+  .lead-form {
+    margin-top: 18px;
+    padding-top: 0;
+    border-top: none;
+    max-width: none;
+  }
+  .lead-form__hint {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .lead-form__contacts-note {
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--text-muted);
+    margin: 0 0 10px;
+  }
+  .lead-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .lead-form__row .lead-form__field {
+    margin-bottom: 0;
+  }
+  .lead-form__field {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text);
+    background: #fff;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .lead-form__field::placeholder { color: var(--text-soft); }
+  .lead-form__field:focus {
+    border-color: var(--orange-ring);
+    box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.22);
+  }
+  .lead-form__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 6px 0 16px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+  .lead-form__consent input {
+    margin-top: 3px;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: var(--text);
+  }
+  .lead-form__consent a {
+    color: var(--text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .lead-form__submit {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-on-orange);
+    background: var(--orange-ring);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+  }
+  .lead-form__submit:hover:not(:disabled) {
+    opacity: 0.92;
+  }
+  .lead-form__submit:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .lead-form__status {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.45;
+    min-height: 1.45em;
+  }
+  .lead-form__status.is-ok { color: #1a6b3a; }
+  .lead-form__status.is-err { color: #b42318; }
 
   /* --- PAGE FOOTER --- */
   .page-footer {
-    border-top: 1px solid var(--line);
+    background: var(--bg);
+    border-top: 1px solid var(--line-strong);
     padding: 22px 0 26px;
-    margin-top: 12px;
+    margin-top: 0;
   }
   .page-footer-inner {
-    max-width: 1100px;
+    width: 100%;
+    max-width: var(--page-max);
     margin: 0 auto;
-    padding: 0 32px;
+    padding-inline: var(--page-gutter);
+    box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 12px;
     font-size: 12px;
     color: var(--text-soft);
     letter-spacing: 0.2px;
+  }
+  .page-footer-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .page-footer-note {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--text-soft);
+    max-width: 72ch;
+  }
+  .page-footer-note b {
+    color: var(--text-muted);
+    font-weight: 600;
   }
 
   /* --- SVG defaults --- */
@@ -1149,22 +3019,20 @@
   /* --- RESPONSIVE --- */
   @media (max-width: 960px) {
     .data-layout { grid-template-columns: 1fr; gap: 16px; }
-    #data .section-title { max-width: none; }
-    #data .section-sub { max-width: none; }
+    #data .section-title,
+    #data-moscow .section-title { max-width: none; }
+    #data .section-sub,
+    #data-moscow .section-sub { max-width: none; }
     .value-layout { grid-template-columns: 1fr; gap: 16px; }
     #value .section-title,
     #value .section-sub { max-width: none; text-align: left; }
     .nav-links { display: none; }
-    .hero .container {
-      padding-left: calc(var(--page-gutter) + 64px);
-      padding-right: var(--page-gutter);
-    }
-    .nav-brand { width: auto; }
-    .nav-brand-logo.prosebya { width: 102px; height: 22px; }
-    .nav-brand-logo.fom { width: 108px; height: 24px; transform: none; }
+    .nav-cta { margin-left: auto; }
+    .nav-brand-logo { height: 34px; }
+    .nav-brand-logo.fom { height: 32px; }
     section { padding: 34px 0; }
-    .hero { padding: 44px 0 48px; background: var(--bg); }
-    .hero h1 { font-size: 38px; letter-spacing: -0.02em; }
+    .hero { padding: 28px 0 36px; background: var(--ivory); }
+    .hero h1 { font-size: 36px; letter-spacing: -0.03em; max-width: none; }
     .section-title { font-size: 30px; }
     .metrics-row { grid-template-columns: 1fr 1fr; }
     .key-visual-grid { grid-template-columns: 1fr; }
@@ -1182,24 +3050,26 @@
     .report-chart-wrap.large { height: 320px; }
     .footer-row { grid-template-columns: 1fr; gap: 28px; }
     .cta-section { padding: 32px 28px; }
+    .lead-form__row { grid-template-columns: 1fr; }
+    .conclusion-card { padding: 24px 22px; }
+    .conclusion-card p { font-size: 15px; }
+    .value-intro__lead { max-width: none; }
   }
-  @media (max-width: 1280px) {
-    .nav-inner { gap: 12px; }
-    .nav-brand-logo.prosebya { width: 118px; height: 26px; }
-    .nav-brand-logo.fom { width: 112px; height: 24px; transform: scale(1.12); }
-    .nav-links { gap: 10px; }
-    .nav-links a { font-size: 10.5px; }
-    .nav-cta { font-size: 10.5px; padding: 7px 10px; }
+  @media (max-width: 1180px) {
+    .nav-links a {
+      font-size: 13px;
+    }
+    .nav-cta {
+      font-size: 12px;
+      padding: 10px 16px;
+    }
   }
   @media (max-width: 600px) {
-    .container, .nav-inner, .page-footer-inner { padding-left: 20px; padding-right: 20px; }
-    .hero .container { padding-left: 20px; padding-right: 20px; }
-    .nav-brand-logo.prosebya { width: 100px; height: 22px; }
-    .nav-brand-logo.fom { width: 102px; height: 22px; transform: none; }
-    .hero h1 { font-size: 32px; line-height: 1.16; }
-    .hero-lede { font-size: 18px; }
-    .hero { padding: 36px 0 42px; }
-    .hero { background: var(--bg); }
+    .nav-brand-logo { height: 30px; }
+    .nav-brand-logo.fom { height: 28px; }
+    .hero h1 { font-size: 28px; line-height: 1.12; max-width: none; }
+    .hero-lede { font-size: 16px; }
+    .hero { padding: 20px 0 28px; background: var(--ivory); }
     .section-title { font-size: 26px; }
     .section-sub { margin-bottom: 12px; }
     .report-page { padding: 14px 12px 16px; }
@@ -1241,7 +3111,8 @@
     .nav-cta, .hero-cta-row { display: none; }
     section { padding: 28px 0; page-break-inside: avoid; }
     .brush { display: none; }
-    .hero h1 { font-size: 36px; }
+    .hero { background: var(--ivory); }
+    .hero h1 { font-size: 34px; }
     .section-title { font-size: 30px; }
   }
 </style>
@@ -1250,61 +3121,54 @@
 
 <!-- NAV -->
 <nav class="nav">
-  <div class="nav-inner">
+  <div class="container nav-inner">
     <div class="nav-brand">
       <img class="nav-brand-logo prosebya" src="./assets/logo-prosebya.svg" alt="Логотип Просебя">
       <span class="nav-brand-divider">×</span>
       <img class="nav-brand-logo fom" src="./assets/logo-fom-cropped.png" alt="Фонд Общественное мнение">
     </div>
     <ul class="nav-links">
-      <li><a href="#problem">Проблема</a></li>
       <li><a href="#what-researches">Что исследуем</a></li>
-      <li><a href="#data">Данные</a></li>
       <li><a href="#report-example">Пример отчёта</a></li>
-      <li><a href="#value">Ценность</a></li>
-      <li><a href="#cta">Контакты</a></li>
+      <li><a href="#value">Ценность для региона</a></li>
     </ul>
-    <a href="#cta" class="nav-cta">Обсудить исследование для вашего региона</a>
+    <a href="#cta" class="nav-cta">Обсудить исследование</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="brush" style="width: 460px; height: 320px; top: -130px; right: -120px; background: var(--block); opacity: 0.22; transform: rotate(12deg);"></div>
-  <div class="brush" style="width: 240px; height: 180px; top: 80px; right: 120px; background: var(--block-soft); opacity: 0.35; transform: rotate(-15deg);"></div>
-  <div class="brush" style="width: 320px; height: 220px; bottom: -90px; left: -110px; background: var(--block-lightest); opacity: 0.28; transform: rotate(-20deg);"></div>
-
-  <div class="container hero-inner">
+  <div class="container">
     <div class="section-eyebrow">Исследование ментального благополучия для региональных руководителей</div>
     <h1>Состояние людей в вашем регионе — управляемый ресурс</h1>
     <p class="hero-lede">
-      <b>Индекс ментального благополучия</b> — короткая и точная диагностика состояния работающего населения для управленческих решений региона. Научная методика Просебя × Фонд «Общественное мнение», апробированная на всероссийской выборке.
+      <b>Индекс ментального благополучия</b> — точная диагностика состояния работающего населения для управленческих решений региона.<br>Апробирован на всероссийской выборке.
     </p>
     <div class="hero-cta-row">
-      <a href="#value" class="btn-primary">Что дает региону?
+      <a href="#value" class="btn-primary">Что дает региону
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#cta" class="btn-ghost">Связаться</a>
+      <a href="#partners" class="btn-ghost">Подробнее о методике</a>
     </div>
   </div>
 </section>
 
-<!-- PROBLEM / MANIFESTO -->
+<!-- NATIONAL PRIORITY / GOVIKOVA QUOTE -->
 <section id="problem">
   <div class="container">
     <div class="section-eyebrow">Национальная цель и задача региона</div>
     <h2 class="section-title">Здоровье и благополучие людей — национальный приоритет, который требует точной диагностики на уровне региона</h2>
     <div class="manifest">
-      <p>Производительность труда, текучесть, заболеваемость и социальная устойчивость напрямую связаны с состоянием людей, включая психическое здоровье. Без диагностики этот фактор не виден в управленческой картине.</p>
-      <p>Регулярные измерения позволяют понять причины и точнее воздействовать на ситуацию.</p>
       <div class="gov-quote">
-        <div class="quote-main">
-          <p class="quote-text">Главой государства обозначена ключевая национальная цель — сохранение населения, укрепление здоровья, повышение благополучия людей, поддержка семьи. Для Правительства это абсолютный приоритет, который касается главной ценности государства и его самого важного социально-экономического ресурса — здоровья нации»</p>
-          <p class="quote-meta">Октябрь 2025 · Конгресс «Национальное здравоохранение — 2025» · <a href="http://government.ru/news/56627/">Источник</a></p>
+        <div class="gov-quote__body">
+          <p class="gov-quote__text">Главой государства обозначена ключевая национальная цель — сохранение населения, укрепление здоровья, повышение благополучия людей, поддержка семьи. Для Правительства это абсолютный приоритет, который касается главной ценности государства и его самого важного социально-экономического ресурса — здоровья нации»</p>
+          <p class="gov-quote__meta">Октябрь 2025 · Конгресс «Национальное здравоохранение — 2025» · <a href="http://government.ru/news/56627/">Источник</a></p>
+          <div class="gov-quote__person"><b>Татьяна Голикова</b><span>Заместитель Председателя Правительства РФ</span></div>
         </div>
-        <div class="quote-author">
-          <img class="quote-photo" src="./assets/golikova-portrait.png" alt="Татьяна Голикова">
-          <div class="quote-person"><b>Татьяна Голикова</b><span>Заместитель Председателя Правительства РФ</span></div>
+        <div class="gov-quote__visual">
+          <div class="gov-portrait">
+            <img src="./assets/golikova-portrait.png" alt="Татьяна Голикова" width="240" height="240" loading="lazy" decoding="async">
+          </div>
         </div>
       </div>
     </div>
@@ -1315,197 +3179,208 @@
 <section id="what-researches">
   <div class="container">
     <div class="section-eyebrow">Три опоры измерения</div>
-    <h2 class="section-title">Что именно измеряет Индекс</h2>
-    <p class="section-sub">Не опрос удовлетворённости, а многоуровневая диагностика по трём связанным направлениям.</p>
+    <h2 class="section-title">Что именно измеряет индекс ментального благополучия</h2>
+    <p class="section-sub">Инструмент даёт региону объективную диагностику с опорой для управленческих решений и повторных замеров динамики, а не разовый опрос удовлетворённости.</p>
 
     <div class="blocks-3">
       <div class="b">
-        <div class="b-head">Ментальное состояние</div>
-        <div class="b-note">Стресс-статус и симптомы: выгорание, тревожность, упадок сил, нарушения сна, подавленность, ощущение одиночества, панические атаки.</div>
+        <div class="b-head">Внешние факторы</div>
+        <div class="b-note">Социальные (ситуация в стране, регионе и районе), личные (семья, жильё, экология, здоровье) и профессиональные (нагрузка, оплата, отношения).</div>
       </div>
       <div class="b soft">
         <div class="b-head">Внутренние факторы</div>
         <div class="b-note">Психологический профиль и устойчивость: уверенность в себе, энергичность, адаптивность, отношение к переменам, способность справляться с давлением.</div>
       </div>
       <div class="b lightest">
-        <div class="b-head">Внешние факторы</div>
-        <div class="b-note">Профессиональные (нагрузка, оплата, отношения), личные (семья, жильё, экология, здоровье) и социальные (ситуация в стране, регионе и районе).</div>
+        <div class="b-head">Ментальное состояние</div>
+        <div class="b-note">Стресс-статус и симптомы: выгорание, тревожность, упадок сил, нарушения сна, подавленность, ощущение одиночества, панические атаки.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- KEY DATA -->
-<section id="data" style="background: var(--bg-soft);">
+<!-- RESEARCH FINDINGS -->
+<section id="data">
   <div class="container">
     <div class="data-layout">
       <div class="data-intro">
-        <div class="section-eyebrow">Ключевые данные</div>
-        <h2 class="section-title">Что уже показали исследования по России и Московской области</h2>
-        <p class="section-sub">Россия — август 2025, Московская область — сентябрь 2025. Ниже — сопоставимые ориентиры из этих исследований: шкала общего индекса, доли по уровням и ключевые риск-факторы.</p>
+        <div class="section-eyebrow">Что уже показали исследования</div>
+        <h2 class="section-title">Исследования по Российской Федерации</h2>
+        <p class="section-sub">Всероссийская выборка работающих россиян, август 2025 — общее значение индекса, ключевые зоны внимания и адресные группы поддержки.</p>
+      </div>
+      <div class="data-cards">
+          <div class="metrics-row">
+            <div class="metric-card">
+              <div class="metric-num">30 <span class="unit">балл.</span></div>
+              <div class="metric-label">Общий индекс ментального благополучия на шкале от −100 до +100</div>
+              <div class="metric-tag">Базовый ориентир</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-num">35<span class="unit">%</span></div>
+              <div class="metric-label">Доля людей с низким уровнем индекса ментального благополучия по России</div>
+              <div class="metric-tag">Требует наблюдения</div>
+            </div>
+            <div class="metric-card alt">
+              <div class="metric-num">57<span class="unit">%</span></div>
+              <div class="metric-label">Переживали стрессы за последний месяц</div>
+              <div class="metric-tag">Требует наблюдения</div>
+            </div>
+            <div class="metric-card alt">
+              <div class="metric-num">−6 <span class="unit">балл.</span></div>
+              <div class="metric-label">Социальные факторы на шкале от −100 до +100 — зона повышенного риска</div>
+              <div class="metric-tag">Ключевая зона напряжения</div>
+            </div>
+            <div class="metric-card alt2">
+              <div class="metric-num">42<span class="unit">%</span></div>
+              <div class="metric-label">Молодёжь 18–35 — низкий уровень индекса в группе</div>
+              <div class="metric-tag">Приоритет поддержки</div>
+            </div>
+            <div class="metric-card alt2">
+              <div class="metric-num">42<span class="unit">%</span></div>
+              <div class="metric-label">Женщины — низкий уровень индекса в группе</div>
+              <div class="metric-tag">Приоритет поддержки</div>
+            </div>
+          </div>
+
+          <div class="conclusion-card" id="dataInsightRussia">
+            <div class="conclusion-card__label">Ориентир по России</div>
+            <p>Около <b>трети</b> работающих россиян находятся на <b>низком уровне</b> ментального благополучия, <b>больше половины</b> — <b>испытывали стрессы</b> за последний месяц. Сильнее всего определяет картину <b>регулярное напряжение</b> и <b>социальные факторы</b>. <b>Молодёжь</b> и <b>женщины</b> — наиболее уязвимые и требующие поддержки аудитории.</p>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH FINDINGS — MOSCOW OBLAST -->
+<section id="data-moscow">
+  <div class="container">
+    <div class="data-layout">
+      <div class="data-intro">
+        <div class="section-eyebrow">Что уже показали исследования</div>
+        <h2 class="section-title">Московская область</h2>
+        <p class="section-sub">Замер по работающему населению области, сентябрь 2025</p>
       </div>
       <div class="data-cards">
         <div class="metrics-row">
           <div class="metric-card">
-            <div class="metric-num">30 / 31 <span class="unit">балл.</span></div>
-            <div class="metric-label">Общий индекс на шкале от −100 до +100: Россия / Московская область.</div>
+            <div class="metric-num">31 <span class="unit">балл.</span></div>
+            <div class="metric-label">Общий индекс ментального благополучия на шкале от −100 до +100</div>
             <div class="metric-tag">Базовый ориентир</div>
           </div>
           <div class="metric-card">
-          <div class="metric-num">35<span class="unit">%</span></div>
-            <div class="metric-label">Доля людей с низким уровнем одинакова в обеих выборках.</div>
-            <div class="metric-tag">Структура риска</div>
+            <div class="metric-num">35<span class="unit">%</span></div>
+            <div class="metric-label">Доля людей с низким уровнем индекса ментального благополучия по Московской области</div>
+            <div class="metric-tag">Требует наблюдения</div>
           </div>
           <div class="metric-card alt">
-            <div class="metric-num">57<span class="unit">%</span></div>
-            <div class="metric-label">Переживали стресс за последний месяц по данным России.</div>
-            <div class="metric-tag">Сигнал внимания</div>
+            <div class="metric-num">54<span class="unit">%</span></div>
+            <div class="metric-label">Переживали стрессы за последний месяц</div>
+            <div class="metric-tag">Требует наблюдения</div>
           </div>
-          <div class="metric-card alt" style="border-top-color: #E25A2C;">
-            <div class="metric-num">−6 / −2 <span class="unit">балл.</span></div>
-            <div class="metric-label">Социальные факторы по шкале от −100 до +100: Россия (−6) / Московская область (−2).</div>
-            <div class="metric-tag">Ключевая зона риска</div>
+          <div class="metric-card alt">
+            <div class="metric-num">−2 <span class="unit">балл.</span></div>
+            <div class="metric-label">Социальные факторы на шкале от −100 до +100 — зона повышенного риска</div>
+            <div class="metric-tag">Ключевая зона напряжения</div>
+          </div>
+          <div class="metric-card alt2">
+            <div class="metric-num">43<span class="unit">%</span></div>
+            <div class="metric-label">Молодёжь 18–35 — низкий уровень индекса в группе</div>
+            <div class="metric-tag">Приоритет поддержки</div>
+          </div>
+          <div class="metric-card alt2">
+            <div class="metric-num">43<span class="unit">%</span></div>
+            <div class="metric-label">Женщины — низкий уровень индекса в группе</div>
+            <div class="metric-tag">Приоритет поддержки</div>
           </div>
         </div>
 
-        <div class="insight-box">
-          <div class="insight-box-title">Главный вывод</div>
-          <p>Чтобы реализовать национальный приоритет по здоровью и благополучию, региону нужна регулярная диагностика состояния людей и адресные меры по группам риска.</p>
+        <div class="conclusion-card" id="dataInsightMoscow">
+          <div class="conclusion-card__label">Вывод по региону</div>
+          <p>Около <b>трети</b> работающих в <b>Московской области</b> находятся на <b>низком уровне</b> ментального благополучия, <b>больше половины</b> — <b>испытывали стрессы</b> за последний месяц. Сильнее всего определяют картину <b>регулярное напряжение</b> и <b>социальные факторы</b>. <b>Молодёжь</b> и <b>женщины</b> — наиболее уязвимые и требующие поддержки аудитории.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ADDRESS GROUPS -->
-<section id="addr" style="background: var(--bg-soft);">
-  <div class="container">
-    <div class="section-eyebrow">Адресные группы и группы риска</div>
-    <h2 class="section-title">Кто в зоне наибольшей уязвимости</h2>
-    <p class="section-sub">Данные Московской области. Приоритетные группы для адресных региональных мер.</p>
-    <p class="addr-read-note">Как читать: процент показывает долю людей <b>внутри каждой группы</b>, у которых выявлен низкий уровень индекса ментального благополучия.</p>
-
-    <div class="addr-subhead">По социально-демографическим признакам</div>
-    <div class="addr-row">
-      <div class="addr-card">
-        <div class="addr-brush"><div class="fill" style="width:43%;"></div></div>
-        <div class="addr-pct">43%</div>
-        <div class="addr-label">Молодёжь<br>18–35 лет</div>
-      </div>
-      <div class="addr-card soft">
-        <div class="addr-brush soft"><div class="fill" style="width:43%;"></div></div>
-        <div class="addr-pct">43%</div>
-        <div class="addr-label">Женщины</div>
-      </div>
-      <div class="addr-card soft">
-        <div class="addr-brush soft"><div class="fill" style="width:41%;"></div></div>
-        <div class="addr-pct">41%</div>
-        <div class="addr-label">Не состоят<br>в браке</div>
-      </div>
-      <div class="addr-card soft">
-        <div class="addr-brush warn"><div class="fill" style="width:40%;"></div></div>
-        <div class="addr-pct">40%</div>
-        <div class="addr-label">Без детей</div>
-      </div>
-    </div>
-
-    <p class="addr-caption"><b>Вывод для региона.</b> В фокусе — молодёжь, женщины, жители без семьи и детей. Именно по этим группам адресные меры поддержки и профилактики дадут самый заметный эффект для устойчивости территории.</p>
   </div>
 </section>
 
 <!-- REPORT EXAMPLE -->
-<section id="report-example" style="background: var(--bg-soft);">
+<section id="report-example">
   <div class="container">
     <div class="section-eyebrow">Пример отчёта</div>
     <h2 class="section-title">Как выглядит итоговая аналитика для региона</h2>
-    <p class="section-sub">В отчёте регион видит сравнение с Россией в целом, другими регионами и своим контуром ответственности.</p>
 
-    <div class="report-pages">
-      <div class="report-page symptoms-page">
-        <div class="report-page-tag">Стр. 1 · Индекс и структура распределения</div>
-        <div class="report-page-title">Значение индекса и доли групп населения</div>
-        <div class="report-page-cap">Совместный анализ общего индекса и распределения по уровням риска показывает масштаб задачи и приоритетность мер для региона.</div>
-        <div class="report-toggle" data-toggle-group="index">
-          <button class="active" data-target="russia">Россия</button>
-          <button data-target="moscow">Московская область</button>
-          <button data-target="your">Ваш регион</button>
-        </div>
-        <div class="report-grid-2">
-          <div class="report-mini-card equal-size">
-            <div class="report-mini-title">Шкала общего индекса (−100…+100)</div>
-            <svg viewBox="0 0 420 220" width="100%" preserveAspectRatio="xMidYMid meet">
-              <line id="indexScaleBase" x1="98" y1="20" x2="98" y2="200" stroke="#22263B22" stroke-width="18" stroke-linecap="round"></line>
-              <line id="indexScaleLow" x1="98" y1="110" x2="98" y2="200" stroke="#FFD96B" stroke-width="18" stroke-linecap="round"></line>
-              <line id="indexScaleHigh" x1="98" y1="20" x2="98" y2="110" stroke="#FFCE30" stroke-width="18" stroke-linecap="round"></line>
-              <line x1="98" y1="20" x2="108" y2="20" stroke="#22263B66"></line>
-              <line x1="98" y1="110" x2="108" y2="110" stroke="#22263B66"></line>
-              <line x1="98" y1="200" x2="108" y2="200" stroke="#22263B66"></line>
-              <text x="120" y="24" font-size="11" fill="#22263B99">+100</text>
-              <text x="120" y="114" font-size="11" fill="#22263B99">0</text>
-              <text x="120" y="204" font-size="11" fill="#22263B99">−100</text>
-
-              <circle id="indexMarker" cx="98" cy="83" r="8" fill="#22263B"></circle>
-              <text id="indexRegionValue" x="150" y="87" font-size="13" font-weight="700" fill="#22263B">Россия: 30</text>
-            </svg>
-          </div>
-          <div class="report-mini-card equal-size">
-            <div class="report-mini-title">Распределение по группам (%)</div>
-            <div class="report-chart-wrap small"><canvas id="reportDistributionChart"></canvas></div>
-            <div style="display:flex; flex-direction:column; gap:6px; margin-top:10px; font-size:12px; color:var(--text);">
-              <div><span style="display:inline-block;width:10px;height:10px;background:#FFE9A8;border-radius:2px;margin-right:8px;"></span>Низкий уровень — <span id="distLow">35%</span></div>
-              <div><span style="display:inline-block;width:10px;height:10px;background:#FFCE30;border-radius:2px;margin-right:8px;"></span>Средний уровень — <span id="distMid">32%</span></div>
-              <div><span style="display:inline-block;width:10px;height:10px;background:#22263B;border-radius:2px;margin-right:8px;"></span>Высокий уровень — <span id="distHigh">34%</span></div>
+    <div class="report-carousel" id="reportCarousel" aria-roledescription="carousel">
+      <div class="report-carousel__stage">
+        <button type="button" class="report-carousel__btn report-carousel__btn--side" id="reportCarouselPrev" aria-label="Предыдущий слайд">‹</button>
+        <div class="report-carousel__frame">
+          <div class="report-carousel__viewport">
+            <div class="report-carousel__track" id="reportCarouselTrack">
+          <article class="report-slide report-slide--index" aria-label="Слайд 1 из 6">
+            <div class="report-slide-intro">
+              <div class="report-page-tag">Пример 1 · Индекс и структура</div>
+              <div class="report-page-title">Индекс, субиндексы и индикаторы по России</div>
+              <p class="report-value-bullet">Единая шкала и расшифровка по трём опорам — видно, какие блоки сильнее всего влияют на общий уровень.</p>
+            </div>
+            <div class="report-slide-body">
+              <div class="report-slide-chart"><div class="report-panel report-panel--index" id="repChart1"></div></div>
+            </div>
+          </article>
+          <article class="report-slide report-slide--stress" aria-label="Слайд 2 из 6">
+            <div class="report-slide-intro">
+              <div class="report-page-tag">Пример 2 · Стресс-статус</div>
+              <div class="report-page-title">Анализ компонента: стресс-статус</div>
+              <p class="report-value-bullet">Показывает, как население оценивает наличие и частоту стрессов за последний месяц — в связке с уровнем индекса.</p>
+            </div>
+            <div class="report-slide-body">
+              <div class="report-slide-chart"><div class="report-panel report-panel--stress report-panel--chart" id="repChart2"></div></div>
+            </div>
+          </article>
+          <article class="report-slide report-slide--symptoms" aria-label="Слайд 3 из 6">
+            <div class="report-slide-intro">
+              <div class="report-page-tag">Пример 3 · Симптомы</div>
+              <div class="report-page-title">Анализ компонента: симптомы ментального неблагополучия</div>
+              <p class="report-value-bullet">Какие состояния испытывали жители за последний месяц — по типам уровня индекса.</p>
+            </div>
+            <div class="report-slide-body">
+              <div class="report-slide-chart"><div class="report-panel report-panel--symptoms report-panel--chart" id="repChart3"></div></div>
+            </div>
+          </article>
+          <article class="report-slide report-slide--professional" aria-label="Слайд 4 из 6">
+            <div class="report-slide-intro">
+              <div class="report-page-tag">Пример 4 · Профессиональные факторы</div>
+              <div class="report-page-title">Анализ компонента: профессиональные факторы</div>
+              <p class="report-value-bullet">Удовлетворённость нагрузкой, условиями, процессами, ростом и отношениями — в связке с уровнем индекса.</p>
+            </div>
+            <div class="report-slide-body">
+              <div class="report-slide-chart"><div class="report-panel report-panel--professional report-panel--chart" id="repChart4"></div></div>
+            </div>
+          </article>
+          <article class="report-slide report-slide--personal" aria-label="Слайд 5 из 6">
+            <div class="report-slide-intro">
+              <div class="report-page-tag">Пример 5 · Личностные факторы</div>
+              <div class="report-page-title">Анализ компонента: личностные факторы</div>
+              <p class="report-value-bullet">Личные установки и контроль над жизнью — в связке с уровнем индекса ментального благополучия.</p>
+            </div>
+            <div class="report-slide-body">
+              <div class="report-slide-chart"><div class="report-panel report-panel--personal report-panel--chart" id="repChart5"></div></div>
+            </div>
+          </article>
+          <article class="report-slide report-slide--social" aria-label="Слайд 6 из 6">
+            <div class="report-slide-intro">
+              <div class="report-page-tag">Пример 6 · Социальные факторы</div>
+              <div class="report-page-title">Анализ компонента: социальные факторы</div>
+              <p class="report-value-bullet">Как отношение к экономике, ситуации в стране и в регионе соотносится с уровнем ментального благополучия.</p>
+            </div>
+            <div class="report-slide-body">
+              <div class="report-slide-chart"><div class="report-panel report-panel--social report-panel--chart" id="repChart6"></div></div>
+            </div>
+          </article>
             </div>
           </div>
+          <p class="report-carousel__counter" id="reportCarouselCounter" aria-live="polite">1 / 6 · Индекс</p>
         </div>
-        <div class="report-page-foot"><b>Для чего региону эта информация.</b> Регион получает не абстрактный средний балл, а точную основу для решений: общий уровень состояния и долю людей, которым нужна приоритетная поддержка.</div>
+        <button type="button" class="report-carousel__btn report-carousel__btn--side" id="reportCarouselNext" aria-label="Следующий слайд">›</button>
       </div>
-
-      <div class="report-page social-page">
-        <div class="report-page-tag">Стр. 2 · Субиндексы и индикаторы</div>
-        <div class="report-page-title">Вклад основных факторов в состояние жителей региона</div>
-        <div class="report-page-cap">Ключевые факторы с наибольшим влиянием на итоговый уровень индекса и приоритетность управленческих действий.</div>
-        <div class="report-toggle" data-toggle-group="radar">
-          <button class="active" data-target="russia">Россия</button>
-          <button data-target="moscow">Московская область</button>
-          <button data-target="your">Ваш регион</button>
-        </div>
-        <div class="report-chart-wrap large"><canvas id="reportRadarChart"></canvas></div>
-        <div class="report-mini-note" id="reportRadarNote">Россия: профиль по 7 индикаторам на единой шкале от −100 до +100.</div>
-        <div class="report-page-foot"><b>Для чего региону эта информация.</b> Приоритетные меры формируются по факторам с наибольшим отрицательным вкладом в состояние жителей: в первую очередь по зонам стресса, социальной тревоги и дефицита внутренних ресурсов.</div>
-      </div>
-
-      <div class="report-page">
-        <div class="report-page-tag">Стр. 3 · Симптомы состояния</div>
-        <div class="report-page-title">Частота ключевых симптомов у жителей региона</div>
-        <div class="report-page-cap">Профиль симптомов, которые формируют нагрузку на здоровье и требуют приоритетных профилактических мер.</div>
-        <div class="report-toggle" data-toggle-group="symptoms">
-          <button class="active" data-target="russia">Россия</button>
-          <button data-target="moscow">Московская область</button>
-          <button data-target="your">Ваш регион</button>
-        </div>
-        <div class="report-chart-wrap"><canvas id="reportSymptomsChart"></canvas></div>
-        <div class="report-mini-note" id="reportSymptomsNote">Россия: доли симптомов «часто/постоянно» по ключевым позициям.</div>
-        <div class="report-page-foot"><b>Для чего региону эта информация.</b> В фокус приоритетных мер попадают симптомы с наибольшей частотой, так как именно они сильнее всего влияют на общий уровень ментального благополучия жителей.</div>
-      </div>
-
-      <div class="report-page">
-        <div class="report-page-tag">Стр. 4 · Социальная тревога</div>
-        <div class="report-page-title">Что беспокоит людей сильнее всего</div>
-        <div class="report-page-cap">Профиль социальной тревоги по ключевым темам: страна, экономика, район и область.</div>
-        <div class="report-toggle" data-toggle-group="social">
-          <button class="active" data-target="russia">Россия</button>
-          <button data-target="moscow">Московская область</button>
-          <button data-target="your">Ваш регион</button>
-        </div>
-        <div class="report-chart-wrap"><canvas id="reportSocialChart"></canvas></div>
-        <div class="report-mini-note" id="reportSocialNote">Россия: доли тревоги по ключевым социальным темам.</div>
-        <div class="report-page-foot"><b>Для чего региону эта информация.</b> Страница позволяет отделить общий национальный фон тревоги от локальных региональных факторов, на которые администрация может влиять напрямую.</div>
-      </div>
-    </div>
-
-    <div class="report-page-foot" style="margin-top:24px; padding-top:0; border:0; max-width:none; width:100%; font-size:13px; text-wrap:balance;">
-      Это примеры ключевых страниц, а в полном отчёте доступны дополнительные срезы: возраст, пол, семейный статус, территория и группы риска.
     </div>
   </div>
 </section>
@@ -1515,9 +3390,9 @@
   <div class="container">
     <div class="value-layout">
       <div class="value-intro">
-        <div class="section-eyebrow">Ценность для региона</div>
-        <h2 class="section-title">Что получает региональная администрация</h2>
-        <p class="section-sub">Четыре практических результата для управленческих решений региона — с опорой на валидированные данные и научно обоснованную методологию измерения.</p>
+        <div class="section-eyebrow">Что получает администрация</div>
+        <h2 class="section-title">Практические результаты для управленческих решений региона</h2>
+        <p class="value-intro__lead">Регион, который системно измеряет и улучшает ментальное благополучие жителей и формирует устойчивую модель управления территорией.</p>
       </div>
       <div class="value-content">
         <div class="value-grid">
@@ -1526,34 +3401,69 @@
             <h4>Объективная картина</h4>
             <p>Данные о реальном состоянии работающего населения: ключевые риски и ресурсы.</p>
           </div>
-          <div class="value-card soft">
+          <div class="value-card">
             <div class="value-num">02</div>
             <h4>Бенчмарк с другими регионами</h4>
-            <p>Сравнение с Россией и регионами: где ваш регион сильнее и где отстает.</p>
+            <p>Сравнение с Россией и регионами: где ваш регион сильнее и где отстаёт.</p>
           </div>
-          <div class="value-card soft">
+          <div class="value-card">
             <div class="value-num">03</div>
             <h4>Адресные группы для работы</h4>
             <p>Понятные приоритетные группы по риску для точечных региональных мер.</p>
           </div>
-          <div class="value-card soft">
+          <div class="value-card">
             <div class="value-num">04</div>
             <h4>Измеримая динамика</h4>
             <p>Повторные замеры показывают эффект мер в цифрах, а не в ощущениях.</p>
           </div>
+          <div class="value-card value-card--wide" id="valueNpCard">
+            <div class="value-num">05</div>
+            <h4>Усиление национальных проектов</h4>
+            <p class="value-card__lead">Исследование встраивается в контур нацпроектов, чьи задачи пересекаются с диагностикой ментального состояния населения.</p>
+            <div class="np-pills" role="tablist" aria-label="Национальные проекты">
+              <button type="button" class="np-pill is-active" role="tab" aria-selected="true" data-np="kadry">Кадры</button>
+              <button type="button" class="np-pill" role="tab" aria-selected="false" data-np="youth">Молодёжь и дети</button>
+              <button type="button" class="np-pill" role="tab" aria-selected="false" data-np="life">Продолжительная и активная жизнь</button>
+            </div>
+            <div class="np-pill-panels">
+              <div class="np-pill-panel is-active" role="tabpanel" data-np="kadry">
+                <h5>Национальный проект «Кадры»</h5>
+                <p>Проект нацелен на обеспечение экономики квалифицированными кадрами. Показатели индекса ментального благополучия — в том числе связь с производительностью и текучестью — могут служить индикатором эффективности региональной кадровой политики. Исследование выявляет «болевые точки»: уровень выгорания и стресса у работающего населения — и позволяет целенаправленно на них влиять.</p>
+              </div>
+              <div class="np-pill-panel" role="tabpanel" data-np="youth" hidden>
+                <h5>Национальный проект «Молодёжь и дети»</h5>
+                <p>Цель — создание условий для самореализации молодёжи. Индекс ментального благополучия позволяет сегментировать молодёжную аудиторию (18–35 лет), выявить группы с высокими рисками и точечно направлять меры поддержки. Это соответствует логике адресных групп в отчёте по региону.</p>
+              </div>
+              <div class="np-pill-panel" role="tabpanel" data-np="life" hidden>
+                <h5>Национальный проект «Продолжительная и активная жизнь»</h5>
+                <p>Модернизация системы здравоохранения. Индекс ментального благополучия — инструмент оценки профилактической работы, в том числе в части психического здоровья. Рост доли жителей с высоким уровнем ментального благополучия — прямой результат эффективной работы здравоохранения и социальной поддержки на уровне региона.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="value-callout"><b>Стандарт человекоцентричного управления:</b> регион, который системно измеряет и улучшает ментальное благополучие жителей, формирует устойчивую модель управления территорией.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHO IS WHO -->
-<section>
+<!-- METHODOLOGY & AUTHORS -->
+<section id="partners">
   <div class="container">
     <div class="partners-brief">
-      <div class="section-eyebrow" style="margin-bottom:4px;">Кто проводит исследование</div>
-      <h2 class="section-title" style="margin-bottom:8px; max-width: none;">Коротко о партнёрах проекта</h2>
+      <h2 class="section-title" style="margin-bottom:10px; max-width: none;">О методике и авторах проекта</h2>
+      <p class="section-sub" style="margin-bottom:22px;">Авторская научная методика с независимой экспертной валидацией — авторы разработки и замера в регионе.</p>
+
+      <div class="method-brief">
+        <h3 class="method-brief__title">Методика и экспертная оценка</h3>
+        <p class="method-brief__lead"><b>Индекс ментального благополучия</b> — авторская научная методика совместной разработки Фонда «Общественное мнение» и «Просебя».</p>
+        <div class="method-body">
+          <p>Методика опирается на стандарты крупномасштабной социологии и прикладной психологии: согласованные шкалы, репрезентативная выборка, проверка связей между блоками и интерпретация, пригодная для решений на уровне региона.</p>
+          <p>Перед выходом в региональный замер инструмент прошёл полевую апробацию и <b>независимую экспертную оценку</b> — отдельно проверяли актуальность конструкта, валидность шкал, однозначность формулировок и применимость итогов для адресной политики на местах.</p>
+          <p>Заключения подготовили эксперты в области психологии, социологии, wellbeing и аналитики HR: <b>Т. Нестик</b>, <b>М. Безуглова</b>, <b>В. Радаев</b>, <b>Н. Бехтерева</b>, <b>И. Задорин</b>, <b>М. Дымшиц</b>. Координация экспертного блока — <b>А. Ослон</b> (ФОМ). По итогам проверки подтверждены <b>актуальность</b>, <b>практическая применимость</b> и <b>содержательная и конвергентная валидность</b> инструмента — методика готова к использованию в региональных исследованиях.</p>
+        </div>
+      </div>
+
+      <h3 class="partners-subhead">Авторы проекта</h3>
       <div class="partners-brief-grid">
         <div class="partner-brief-card">
           <img class="partner-brief-logo fom" src="./assets/logo-fom-cropped.png" alt="Логотип Фонда «Общественное мнение»">
@@ -1580,375 +3490,188 @@
 
       <div class="footer-row">
         <div>
-          <div class="meta-label">Обсудить исследование для вашего региона</div>
+          <div class="meta-label">Обсудить исследование</div>
           <div class="cta-title">Соберём под масштаб региона и проведём исследование за 5 недель</div>
-          <div class="cta-contact">
-            <a href="mailto:business@prosebya.ru">business@prosebya.ru</a>
-            <span class="sep">·</span>
-            <a href="https://prosebya.ru">prosebya.ru</a>
-          </div>
-          <div class="cta-secondary">или Фонд «Общественное мнение» напрямую: <a href="mailto:fom@fom.ru">fom@fom.ru</a></div>
+          <p class="cta-channel">Напишите на <a href="mailto:business@prosebya.ru">business@prosebya.ru</a> или оставьте свои контакты.</p>
+
+          <details class="cta-lead-panel" id="ctaLeadPanel">
+            <summary>Оставить свои контакты</summary>
+            <form class="lead-form" id="leadForm" novalidate>
+              <p class="lead-form__hint">Мы свяжемся с вами и расскажем, как провести исследование под масштаб вашего региона.</p>
+              <input class="lead-form__field" type="text" name="region" id="leadRegion" required autocomplete="address-level1" placeholder="Укажите свой регион" maxlength="200">
+              <input class="lead-form__field" type="text" name="name" id="leadName" required autocomplete="name" placeholder="Как к вам обращаться" maxlength="200">
+              <input class="lead-form__field" type="text" name="position" id="leadPosition" required autocomplete="organization-title" placeholder="Ваша должность" maxlength="200">
+              <p class="lead-form__contacts-note">E-mail или телефон — достаточно указать один контакт.</p>
+              <div class="lead-form__row">
+                <input class="lead-form__field" type="email" name="email" id="leadEmail" autocomplete="email" placeholder="E-mail" maxlength="320">
+                <input class="lead-form__field" type="tel" name="phone" id="leadPhone" autocomplete="tel" placeholder="Телефон" maxlength="32">
+              </div>
+              <label class="lead-form__consent">
+                <input type="checkbox" name="consent" id="leadConsent" value="1" required>
+                <span>Даю своё <a href="https://prosebya.ru/docs/prosebya/persdata" target="_blank" rel="noopener noreferrer">согласие</a> на обработку персональных данных</span>
+              </label>
+              <button class="lead-form__submit" type="submit" id="leadSubmit" disabled>Отправить</button>
+              <div class="lead-form__status" id="leadStatus" aria-live="polite"></div>
+            </form>
+          </details>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PAGE FOOTER -->
-<footer class="page-footer">
-  <div class="page-footer-inner">
-    <div>© 2026 Просебя × Фонд «Общественное Мнение»</div>
-    <div>Инфраструктура устойчивости для региональной власти</div>
-  </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 <script>
-(() => {
-  const toggles = document.querySelectorAll('.report-toggle');
-  const state = { index: 'moscow', radar: 'moscow', symptoms: 'moscow', social: 'moscow' };
-  const palette = { base: '#22263B', compare: '#FF804B', accent: '#FE741E' };
+(function () {
+  const form = document.getElementById('leadForm');
+  const consent = document.getElementById('leadConsent');
+  const submit = document.getElementById('leadSubmit');
+  const statusEl = document.getElementById('leadStatus');
+  if (!form || !consent || !submit) return;
 
-  const dataByView = {
-    russia: {
-      regionName: 'Россия',
-      indexValue: 30,
-      indexNote: 'Россия: индекс 30; низкий 35%, средний 32%, высокий 34%.',
-      distribution: [35, 32, 34],
-      radarSeries: [3, 49, 34, 39, 47, 43, -6],
-      radarCompareLabel: 'Московская область',
-      radarCompare: [8, 53, 27, 39, 49, 44, -2],
-      symptomsCompareLabel: 'Московская область',
-      symptomsCompare: [26, 23, 20, 17, 16],
-      socialCompareLabel: 'Московская область',
-      socialCompare: [57, 57, 58, 43, 42]
-    },
-    moscow: {
-      regionName: 'Московская область',
-      indexValue: 31,
-      indexNote: 'Московская область: индекс 31; низкий 35%, средний 27%, высокий 38%.',
-      distribution: [35, 27, 38],
-      radarSeries: [8, 53, 27, 39, 49, 44, -2],
-      radarCompareLabel: 'Россия',
-      radarCompare: [3, 49, 34, 39, 47, 43, -6],
-      symptomsCompareLabel: 'Россия',
-      symptomsCompare: [24, 22, 19, 16, 14],
-      socialCompareLabel: 'Россия',
-      socialCompare: [58, 57, 57, 43, 42]
-    },
-    regions: {
-      regionName: 'Другие регионы',
-      indexValue: 31,
-      indexNote: 'Московская область: +31, медиана других регионов: +29',
-      distribution: [36, 29, 35],
-      radarSeries: [6, 50, 31, 37, 46, 42, -4],
-      radarCompareLabel: 'Другие регионы',
-      radarCompare: [6, 50, 31, 37, 46, 42, -4],
-      symptomsCompareLabel: 'Другие регионы',
-      symptomsCompare: [22, 20, 18, 15, 13],
-      socialCompareLabel: 'Другие регионы',
-      socialCompare: [55, 54, 53, 41, 40]
-    },
-    your: {
-      regionName: 'Ваш регион',
-      indexValue: null,
-      indexNote: 'Ваш регион: здесь автоматически появятся фактические данные после проведения исследования.',
-      distribution: null,
-      radarSeries: null,
-      radarCompareLabel: 'Ваш регион',
-      radarCompare: [5, 46, 28, 35, 44, 40, -8],
-      symptomsCompareLabel: 'Ваш регион',
-      symptomsCompare: [27, 24, 22, 18, 16],
-      socialCompareLabel: 'Ваш регион',
-      socialCompare: [60, 59, 58, 48, 47]
-    }
-  };
+  let submitting = false;
 
-  const indexMarker = document.getElementById('indexMarker');
-  const indexRegionValue = document.getElementById('indexRegionValue');
-  const indexScaleLow = document.getElementById('indexScaleLow');
-  const indexScaleHigh = document.getElementById('indexScaleHigh');
-  const reportRadarNote = document.getElementById('reportRadarNote');
-  const reportSymptomsNote = document.getElementById('reportSymptomsNote');
-  const reportSocialNote = document.getElementById('reportSocialNote');
-  const distLow = document.getElementById('distLow');
-  const distMid = document.getElementById('distMid');
-  const distHigh = document.getElementById('distHigh');
-  let currentIndexTarget = 'russia';
-
-  const distributionChart = new Chart(document.getElementById('reportDistributionChart'), {
-    type: 'bar',
-    data: {
-      labels: ['Распределение'],
-      datasets: [
-        { label: 'Низкий', data: [dataByView.russia.distribution[0]], backgroundColor: '#FFE9A8', borderRadius: 6, borderSkipped: false, stack: 's' },
-        { label: 'Средний', data: [dataByView.russia.distribution[1]], backgroundColor: '#FFCE30', borderRadius: 6, borderSkipped: false, stack: 's' },
-        { label: 'Высокий', data: [dataByView.russia.distribution[2]], backgroundColor: '#22263B', borderRadius: 6, borderSkipped: false, stack: 's' }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      indexAxis: 'y',
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { stacked: true, min: 0, max: 100, ticks: { callback: (v) => `${v}%` }, grid: { color: '#22263B12' } },
-        y: { stacked: true, grid: { display: false } }
-      },
-      layout: { padding: { top: 14, right: 8, bottom: 8, left: 8 } }
+  function syncSubmit() {
+    if (submitting) {
+      submit.disabled = true;
+      return;
     }
-  });
-
-  const radarChart = new Chart(document.getElementById('reportRadarChart'), {
-    type: 'radar',
-    data: {
-      labels: [
-        'Стресс-статус',
-        'Симптомы неблагополучия',
-        'Психологический профиль',
-        'Психологическая устойчивость',
-        'Профессиональные факторы',
-        'Личностные факторы',
-        'Социальные факторы'
-      ],
-      datasets: [
-        { label: 'Россия', data: dataByView.russia.radarSeries, borderColor: palette.base, backgroundColor: 'rgba(34,38,59,0.14)', pointRadius: 3, borderWidth: 2.5 }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        r: {
-          min: -100,
-          max: 100,
-          ticks: { stepSize: 50, backdropColor: 'transparent' },
-          grid: { color: '#22263B1F' },
-          angleLines: { color: '#22263B1A' },
-          pointLabels: { color: '#22263B', font: { size: 11 } }
-        }
-      },
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            pointStyle: 'rectRounded',
-            boxWidth: 14,
-            boxHeight: 9,
-            padding: 14
-          }
-        }
-      },
-      layout: { padding: { top: 24, right: 28, bottom: 18, left: 28 } }
-    }
-  });
-
-  const symptomsLabels = ['Измотанность', 'Тревога', 'Нарушения сна', 'Подавленность', 'Трудности с концентрацией'];
-  const symptomsChart = new Chart(document.getElementById('reportSymptomsChart'), {
-    type: 'bar',
-    data: {
-      labels: symptomsLabels,
-      datasets: [
-        {
-          label: 'Россия',
-          data: [24, 22, 19, 16, 14],
-          backgroundColor: palette.base,
-          borderRadius: 8,
-          borderSkipped: false
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      indexAxis: 'y',
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            pointStyle: 'circle',
-            boxWidth: 10,
-            boxHeight: 10,
-            padding: 12
-          }
-        }
-      },
-      scales: {
-        x: {
-          min: 0,
-          max: 30,
-          ticks: { callback: (v) => `${v}%` },
-          grid: { color: '#22263B12' }
-        },
-        y: { grid: { display: false } }
-      }
-    }
-  });
-
-  const socialChart = new Chart(document.getElementById('reportSocialChart'), {
-    type: 'bar',
-    data: {
-      labels: [
-        'Ситуация в стране',
-        'Состояние экономики',
-        'Конфликт с Западом',
-        'Ситуация в районе',
-        'Ситуация в области'
-      ],
-      datasets: [
-        {
-          label: 'Россия',
-          data: [58, 57, 57, 43, 42],
-          backgroundColor: palette.base,
-          borderRadius: 8,
-          borderSkipped: false
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      indexAxis: 'y',
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            usePointStyle: true,
-            pointStyle: 'circle',
-            boxWidth: 10,
-            boxHeight: 10,
-            padding: 12
-          }
-        }
-      },
-      scales: {
-        x: { ticks: { callback: (v) => `${v}%` } }
-      }
-    }
-  });
-
-  function updateView(group, target) {
-    state[group] = target;
-    const view = dataByView[target];
-    if (!view) return;
-    if (group === 'index') {
-      currentIndexTarget = target;
-      if (target === 'your') {
-        indexMarker.setAttribute('opacity', '0');
-        indexRegionValue.setAttribute('x', '132');
-        indexRegionValue.setAttribute('y', '88');
-        indexRegionValue.setAttribute('fill', '#9CA1BD');
-        indexRegionValue.textContent = 'Данные появятся после исследования';
-        indexScaleLow.setAttribute('stroke', '#D7DBE8');
-        indexScaleHigh.setAttribute('stroke', '#D7DBE8');
-        distributionChart.data.datasets[0].data = [33.3];
-        distributionChart.data.datasets[1].data = [33.3];
-        distributionChart.data.datasets[2].data = [33.4];
-        distributionChart.data.datasets[0].backgroundColor = '#E3E6EF';
-        distributionChart.data.datasets[1].backgroundColor = '#D7DBE8';
-        distributionChart.data.datasets[2].backgroundColor = '#C9CFDF';
-        distributionChart.update();
-        distLow.textContent = 'доля';
-        distMid.textContent = 'доля';
-        distHigh.textContent = 'доля';
-      } else {
-      const y = 200 - ((view.indexValue + 100) / 200) * 180;
-        indexMarker.setAttribute('opacity', '1');
-        indexMarker.setAttribute('cy', String(y));
-      indexRegionValue.setAttribute('x', '150');
-        indexRegionValue.setAttribute('y', String(y + 4));
-        indexRegionValue.setAttribute('fill', '#22263B');
-        indexRegionValue.textContent = `${view.regionName}: ${view.indexValue}`;
-        indexScaleLow.setAttribute('stroke', '#FFD96B');
-        indexScaleHigh.setAttribute('stroke', '#FFCE30');
-        distributionChart.data.datasets[0].data = [view.distribution[0]];
-        distributionChart.data.datasets[1].data = [view.distribution[1]];
-        distributionChart.data.datasets[2].data = [view.distribution[2]];
-        distributionChart.data.datasets[0].backgroundColor = '#FFE9A8';
-        distributionChart.data.datasets[1].backgroundColor = '#FFCE30';
-        distributionChart.data.datasets[2].backgroundColor = '#22263B';
-        distributionChart.update();
-        distLow.textContent = `${view.distribution[0]}%`;
-        distMid.textContent = `${view.distribution[1]}%`;
-        distHigh.textContent = `${view.distribution[2]}%`;
-      }
-    }
-    if (group === 'radar') {
-      if (target === 'your') {
-        radarChart.data.datasets[0].label = 'Ваш регион';
-        radarChart.data.datasets[0].data = [10, 10, 10, 10, 10, 10, 10];
-        radarChart.data.datasets[0].borderColor = '#C9CFDF';
-        radarChart.data.datasets[0].backgroundColor = 'rgba(201,207,223,0.20)';
-        reportRadarNote.textContent = 'Ваш регион: здесь появится фактический профиль субиндексов и индикаторов после исследования.';
-      } else if (target === 'russia') {
-        radarChart.data.datasets[0].label = 'Россия';
-        radarChart.data.datasets[0].data = dataByView.russia.radarSeries;
-        radarChart.data.datasets[0].borderColor = '#22263B';
-        radarChart.data.datasets[0].backgroundColor = 'rgba(34,38,59,0.14)';
-        reportRadarNote.textContent = 'Россия: профиль по 7 индикаторам на единой шкале от −100 до +100.';
-      } else if (target === 'moscow') {
-        radarChart.data.datasets[0].label = 'Московская область';
-        radarChart.data.datasets[0].data = dataByView.moscow.radarSeries;
-        radarChart.data.datasets[0].borderColor = '#FF804B';
-        radarChart.data.datasets[0].backgroundColor = 'rgba(255,128,75,0.16)';
-        reportRadarNote.textContent = 'Московская область: профиль по 7 индикаторам на единой шкале от −100 до +100.';
-      }
-      radarChart.update();
-    }
-    if (group === 'symptoms') {
-      if (target === 'your') {
-        symptomsChart.data.datasets[0].label = 'Ваш регион';
-        symptomsChart.data.datasets[0].data = [20, 20, 20, 20, 20];
-        symptomsChart.data.datasets[0].backgroundColor = '#C9CFDF';
-        reportSymptomsNote.textContent = 'Ваш регион: после исследования здесь отобразится фактический профиль симптомов.';
-      } else if (target === 'russia') {
-        symptomsChart.data.datasets[0].label = 'Россия';
-        symptomsChart.data.datasets[0].data = [24, 22, 19, 16, 14];
-        symptomsChart.data.datasets[0].backgroundColor = '#22263B';
-        reportSymptomsNote.textContent = 'Россия: доли симптомов «часто/постоянно» по ключевым позициям.';
-      } else if (target === 'moscow') {
-        symptomsChart.data.datasets[0].label = 'Московская область';
-        symptomsChart.data.datasets[0].data = [26, 23, 20, 17, 16];
-        symptomsChart.data.datasets[0].backgroundColor = '#FF804B';
-        reportSymptomsNote.textContent = 'Московская область: доли симптомов «часто/постоянно» по ключевым позициям.';
-      }
-      symptomsChart.update();
-    }
-    if (group === 'social') {
-      if (target === 'your') {
-        socialChart.data.datasets[0].label = 'Ваш регион';
-        socialChart.data.datasets[0].data = [50, 50, 50, 50, 50];
-        socialChart.data.datasets[0].backgroundColor = '#C9CFDF';
-        reportSocialNote.textContent = 'Ваш регион: после исследования здесь отобразится фактический профиль социальной тревоги.';
-      } else if (target === 'russia') {
-        socialChart.data.datasets[0].label = 'Россия';
-        socialChart.data.datasets[0].data = [58, 57, 57, 43, 42];
-        socialChart.data.datasets[0].backgroundColor = '#22263B';
-        reportSocialNote.textContent = 'Россия: доли тревоги по ключевым социальным темам.';
-      } else if (target === 'moscow') {
-        socialChart.data.datasets[0].label = 'Московская область';
-        socialChart.data.datasets[0].data = [57, 57, 58, 43, 42];
-        socialChart.data.datasets[0].backgroundColor = '#FF804B';
-        reportSocialNote.textContent = 'Московская область: доли тревоги по ключевым социальным темам.';
-      }
-      socialChart.update();
-    }
+    submit.disabled = !consent.checked;
   }
+  consent.addEventListener('change', syncSubmit);
+  syncSubmit();
 
-  toggles.forEach((wrap) => {
-    const group = wrap.dataset.toggleGroup;
-    wrap.querySelectorAll('button').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        wrap.querySelectorAll('button').forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
-        updateView(group, btn.dataset.target);
-      });
-    });
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    statusEl.textContent = '';
+    statusEl.classList.remove('is-ok', 'is-err');
+
+    if (!consent.checked) {
+      statusEl.classList.add('is-err');
+      statusEl.textContent = 'Нужно согласие на обработку персональных данных.';
+      return;
+    }
+
+    const region = (document.getElementById('leadRegion').value || '').trim();
+    const name = (document.getElementById('leadName').value || '').trim();
+    const position = (document.getElementById('leadPosition').value || '').trim();
+    const email = (document.getElementById('leadEmail').value || '').trim();
+    const phone = (document.getElementById('leadPhone').value || '').trim();
+
+    function validEmail(v) {
+      return v.length <= 320 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+    function validPhone(v) {
+      const digits = v.replace(/\D/g, '');
+      return v.length >= 7 && v.length <= 32 && digits.length >= 10 && digits.length <= 15;
+    }
+
+    if (!region || !name || !position) {
+      statusEl.classList.add('is-err');
+      statusEl.textContent = 'Заполните регион, обращение и должность.';
+      return;
+    }
+    const hasEmail = email && validEmail(email);
+    const hasPhone = phone && validPhone(phone);
+    if (!hasEmail && !hasPhone) {
+      statusEl.classList.add('is-err');
+      statusEl.textContent = 'Укажите e-mail или телефон — достаточно одного.';
+      return;
+    }
+    if (email && !validEmail(email)) {
+      statusEl.classList.add('is-err');
+      statusEl.textContent = 'Укажите корректный e-mail.';
+      return;
+    }
+    if (phone && !validPhone(phone)) {
+      statusEl.classList.add('is-err');
+      statusEl.textContent = 'Укажите корректный телефон.';
+      return;
+    }
+
+    if (window.location.protocol === 'file:') {
+      statusEl.classList.add('is-err');
+      statusEl.textContent = 'Страница открыта как файл с диска — форма не может отправиться. Запустите в терминале «npm start» в папке проекта и откройте http://localhost:3000';
+      return;
+    }
+
+    const prevLabel = submit.textContent;
+    submitting = true;
+    syncSubmit();
+    submit.textContent = 'Отправка…';
+
+    var abortCtrl = new AbortController();
+    var abortTimer = setTimeout(function () {
+      abortCtrl.abort();
+    }, 35000);
+
+    try {
+      var fetchOpts = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ region, name, position, email, phone, consent: true }),
+        signal: abortCtrl.signal
+      };
+      const res = await fetch('/api/lead', fetchOpts);
+      const data = await res.json().catch(function () { return {}; });
+      if (!res.ok) {
+        throw new Error(data.error || 'Не удалось отправить. Попробуйте позже.');
+      }
+      statusEl.classList.add('is-ok');
+      statusEl.textContent = 'Спасибо! Мы получили заявку и свяжемся с вами.';
+      form.reset();
+      consent.checked = false;
+    } catch (err) {
+      statusEl.classList.add('is-err');
+      if (err && err.name === 'AbortError') {
+        statusEl.textContent = 'Сервер не ответил вовремя. Убедитесь, что запущен «npm start», в .env верный пароль приложения Gmail (без лишних пробелов), и попробуйте снова.';
+      } else {
+        statusEl.textContent = (err && err.message) || 'Ошибка отправки.';
+      }
+    } finally {
+      clearTimeout(abortTimer);
+      submitting = false;
+      submit.textContent = prevLabel;
+      syncSubmit();
+    }
   });
 })();
 </script>
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <div class="page-footer-inner">
+    <div class="page-footer-row">
+      <div>© 2026 Просебя × Фонд «Общественное Мнение»</div>
+      <div>Инфраструктура устойчивости для региональной власти</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const root = document.getElementById('valueNpCard');
+  if (!root) return;
+  const pills = [...root.querySelectorAll('.np-pill')];
+  const panels = [...root.querySelectorAll('.np-pill-panel')];
+  function activate(id) {
+    pills.forEach((pill) => {
+      const on = pill.dataset.np === id;
+      pill.classList.toggle('is-active', on);
+      pill.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    panels.forEach((panel) => {
+      const on = panel.dataset.np === id;
+      panel.classList.toggle('is-active', on);
+      panel.hidden = !on;
+    });
+  }
+  pills.forEach((pill) => {
+    pill.addEventListener('click', () => activate(pill.dataset.np));
+  });
+})();
+</script>
+<script src="./report-carousel.js?v=39"></script>
+
 
 </body>
 </html>
