@@ -1,4 +1,4 @@
-/* Пример отчёта — карусель (6 слайдов, стиль карточек 3–5) */
+/* Пример отчёта — вкладки (6 разделов, переключение как у нацпроектов) */
 (() => {
   const MATRIX_COLS = [
     { label: 'Россия\nв целом', bench: true },
@@ -79,19 +79,26 @@
       { label: 'Отношения с руководством', cells: [{ yes: 91, no: 7 }, { yes: 85, no: 12 }, { yes: 97, no: 1 }, { yes: 100, no: 0 }] },
       { label: 'Рабочее место, физические условия труда', cells: [{ yes: 92, no: 6 }, { yes: 88, no: 10 }, { yes: 96, no: 3 }, { yes: 99, no: 1 }] }
     ],
-    personal: {
-      sectionTitle: 'Личные установки',
-      question: 'Применимы ли к вам приведённые ниже высказывания?',
-      legend: [
-        { cls: 'yes', text: 'это точно про меня или скорее про меня' },
-        { cls: 'no', text: 'это точно не про меня или скорее не про меня' },
-        { cls: 'dk', text: 'затрудняюсь ответить' }
-      ],
-      rows: [
-        { label: 'Моя жизнь находится под моим контролем', cells: [{ yes: 73, no: 26 }, { yes: 64, no: 34 }, { yes: 79, no: 18 }, { yes: 92, no: 6 }] },
-        { label: 'У меня есть долгосрочные планы, и мне удаётся им следовать', cells: [{ yes: 71, no: 27 }, { yes: 59, no: 38 }, { yes: 82, no: 16 }, { yes: 87, no: 11 }] }
-      ]
-    },
+    personalBlocks: [
+      {
+        sectionTitle: 'Удовлетворённость аспектами жизни вне работы',
+        question:
+          'Скажите, Вы удовлетворены или не удовлетворены перечисленными аспектами Вашей жизни вне работы?',
+        legend: [
+          { cls: 'yes', text: 'полностью или скорее удовлетворен (-а)' },
+          { cls: 'no', text: 'полностью или скорее неудовлетворен (-а)' },
+          { cls: 'dk', text: 'затрудняюсь ответить' }
+        ],
+        rows: [
+          { label: 'Отношения с близкими родственниками', cells: [{ yes: 85, no: 14 }, { yes: 76, no: 23 }, { yes: 92, no: 6 }, { yes: 99, no: 1 }] },
+          { label: 'Отношения с друзьями', cells: [{ yes: 87, no: 10 }, { yes: 81, no: 15 }, { yes: 91, no: 6 }, { yes: 95, no: 3 }] },
+          { label: 'Ваше финансовое положение', cells: [{ yes: 51, no: 47 }, { yes: 36, no: 62 }, { yes: 58, no: 39 }, { yes: 81, no: 18 }] },
+          { label: 'Жилищные условия', cells: [{ yes: 73, no: 26 }, { yes: 63, no: 35 }, { yes: 80, no: 18 }, { yes: 83, no: 16 }] },
+          { label: 'Экологическая ситуация в вашем районе', cells: [{ yes: 79, no: 18 }, { yes: 73, no: 24 }, { yes: 82, no: 14 }, { yes: 91, no: 7 }] },
+          { label: 'Состояние здоровья', cells: [{ yes: 65, no: 32 }, { yes: 52, no: 46 }, { yes: 71, no: 25 }, { yes: 92, no: 7 }] }
+        ]
+      }
+    ],
     socialRows: [
       { label: 'Я сильно переживаю, нервничаю по поводу сегодняшней ситуации в России', cells: [{ yes: 46, no: 47 }, { yes: 32, no: 61 }, { yes: 53, no: 38 }, { yes: 71, no: 23 }] },
       { label: 'Я сильно переживаю, нервничаю по поводу СВО и конфликта России с Западом', cells: [{ yes: 45, no: 48 }, { yes: 30, no: 64 }, { yes: 51, no: 42 }, { yes: 68, no: 27 }] },
@@ -287,7 +294,7 @@
     const region = d.indexRegion || 'России';
     const idx = Number(d.index);
     return `
-      <div class="imb-dashboard" role="img" aria-label="Индекс, субиндексы и индикаторы по ${region}">
+      <div class="imb-dashboard" role="img" aria-label="Общее значение индекса и значение различных компонентов по ${region}">
         <div class="imb-dashboard__top">
           <div class="imb-panel imb-panel--main-index">
             <div class="imb-panel__head">
@@ -375,10 +382,7 @@
         id: 'repChart5',
         html: renderMatrixChart({
           tag: 'Личностные факторы',
-          sectionTitle: d.personal.sectionTitle,
-          question: d.personal.question,
-          legend: d.personal.legend,
-          rows: d.personal.rows,
+          blocks: d.personalBlocks,
           note: 'в % от типов',
           extraClass: ' factor-chart--personal'
         })
@@ -408,65 +412,42 @@
 
   renderAll();
 
-  const reportCarousel = document.getElementById('reportCarousel');
-  const reportTrack = document.getElementById('reportCarouselTrack');
-  const reportCounter = document.getElementById('reportCarouselCounter');
-  const reportPrev = document.getElementById('reportCarouselPrev');
-  const reportNext = document.getElementById('reportCarouselNext');
-  if (!reportTrack) return;
+  const reportRoot = document.getElementById('reportExample');
+  if (!reportRoot) return;
 
-  const reportSlides = [...reportTrack.querySelectorAll('.report-slide')];
-  const slideLabels = ['Индекс', 'Стресс', 'Симптомы', 'Профессиональные', 'Личностные', 'Социальные'];
-  let reportIndex = 0;
+  const reportPills = [...reportRoot.querySelectorAll('.report-pill')];
+  const reportPanels = [...reportRoot.querySelectorAll('.report-tab-panel')];
 
-  function syncCarouselHeight() {
-    if (!reportCarousel) return;
-    const top = reportCarousel.getBoundingClientRect().top;
-    const counterH = (reportCounter?.offsetHeight || 16) + 14;
-    const available = window.innerHeight - top - counterH - 12;
-    const h = Math.round(Math.max(260, Math.min(available, 640)));
-    reportCarousel.style.setProperty('--report-carousel-h', `${h}px`);
+  function syncReportBlockHeight() {
+    const section = document.getElementById('report-example');
+    const top = (section || reportRoot).getBoundingClientRect().top;
+    const pillsH = reportRoot.querySelector('.report-pills')?.offsetHeight || 40;
+    const reserve = 20;
+    const h = Math.round(window.innerHeight - top - pillsH - reserve);
+    reportRoot.style.setProperty('--report-block-max-h', `${Math.max(300, Math.min(h, 620))}px`);
   }
 
-  function goReportSlide(i) {
-    reportIndex = Math.max(0, Math.min(reportSlides.length - 1, i));
-    reportTrack.style.transform = `translate3d(-${reportIndex * 100}%, 0, 0)`;
-    const label = slideLabels[reportIndex];
-    if (reportCounter) {
-      reportCounter.textContent = `${reportIndex + 1} / ${reportSlides.length} · ${label}`;
-    }
-    if (reportCarousel) {
-      reportCarousel.setAttribute('aria-label', `Пример отчёта, слайд ${reportIndex + 1} из ${reportSlides.length}: ${label}`);
-    }
-    reportSlides.forEach((slide, j) => {
-      slide.setAttribute('aria-hidden', j === reportIndex ? 'false' : 'true');
+  function activateReportTab(id) {
+    reportPills.forEach((pill) => {
+      const on = pill.dataset.rep === id;
+      pill.classList.toggle('is-active', on);
+      pill.setAttribute('aria-selected', on ? 'true' : 'false');
     });
-    if (reportPrev) reportPrev.disabled = reportIndex === 0;
-    if (reportNext) reportNext.disabled = reportIndex === reportSlides.length - 1;
-  }
-
-  if (reportPrev) reportPrev.addEventListener('click', () => goReportSlide(reportIndex - 1));
-  if (reportNext) reportNext.addEventListener('click', () => goReportSlide(reportIndex + 1));
-
-  if (reportCarousel) {
-    reportCarousel.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        goReportSlide(reportIndex - 1);
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        goReportSlide(reportIndex + 1);
-      }
+    reportPanels.forEach((panel) => {
+      const on = panel.dataset.rep === id;
+      panel.classList.toggle('is-active', on);
+      panel.hidden = !on;
     });
-    reportCarousel.setAttribute('tabindex', '0');
   }
 
-  syncCarouselHeight();
-  window.addEventListener('resize', syncCarouselHeight);
-  window.addEventListener('scroll', syncCarouselHeight, { passive: true });
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(syncCarouselHeight);
-  }
+  reportPills.forEach((pill) => {
+    pill.addEventListener('click', () => activateReportTab(pill.dataset.rep));
+  });
 
-  goReportSlide(0);
+  syncReportBlockHeight();
+  window.addEventListener('resize', syncReportBlockHeight);
+  window.addEventListener('scroll', syncReportBlockHeight, { passive: true });
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(syncReportBlockHeight);
+  }
 })();

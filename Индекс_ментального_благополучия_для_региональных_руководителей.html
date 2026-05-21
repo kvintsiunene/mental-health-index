@@ -752,131 +752,194 @@
   }
   .method-note b { font-weight: 700; }
 
-  /* --- REPORT CAROUSEL (стрелки по бокам, один экран) --- */
-  .report-carousel {
-    position: relative;
+  /* --- REPORT EXAMPLE (вкладки, компактно под экран) --- */
+  .report-example-tabs {
     margin-top: 8px;
-    --report-carousel-offset: 11rem;
-    --report-carousel-h: clamp(280px, calc(100svh - var(--report-carousel-offset)), 620px);
     --rep-bench-bg: rgba(255, 214, 102, 0.28);
     --rep-bench-accent: var(--dominant);
+    --report-block-max-h: min(68vh, 560px);
   }
   #report-example .section-title {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
-  .report-carousel__stage {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 10px;
+  #report-example .report-pills {
+    margin-top: 0;
+    margin-bottom: 8px;
   }
-  .report-carousel__frame {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  #report-example .report-pill {
+    font-size: 12px;
+    padding: 6px 11px;
   }
-  .report-carousel__viewport {
-    height: var(--report-carousel-h);
-    overflow: hidden;
-    border-radius: var(--radius-lg);
+  #report-example .report-panels {
+    margin-top: 0;
+  }
+  #report-example .report-tab-panel {
+    display: none;
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+  #report-example .report-tab-panel.is-active {
+    display: block;
+  }
+  .report-tab-card {
     border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    border-top: 3px solid var(--yellow-deep);
     background: #fff;
-  }
-  .report-carousel__track {
-    display: flex;
-    align-items: stretch;
-    height: 100%;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-  }
-  .report-slide {
-    flex: 0 0 100%;
-    width: 100%;
-    height: var(--report-carousel-h);
-    padding: 10px 14px 12px;
-    border-top: 4px solid var(--yellow-deep);
+    padding: 8px 10px 10px;
     box-sizing: border-box;
+    max-height: var(--report-block-max-h);
     display: flex;
     flex-direction: column;
     overflow: hidden;
   }
-  .report-slide-intro {
+  .report-tab-card .report-slide-intro {
     flex: 0 0 auto;
-    min-height: 0;
-    max-height: 4.5rem;
-    overflow: hidden;
     margin-bottom: 6px;
   }
-  .report-slide .report-page-tag {
-    margin-bottom: 2px;
-    font-size: 9px;
+  .report-tab-card .report-page-tag,
+  .report-tab-card .report-value-bullet {
+    display: none;
   }
-  .report-slide .report-page-title {
-    font-size: 15px;
+  .report-tab-card .report-page-title {
+    font-size: 14px;
     line-height: 1.2;
-    margin-bottom: 2px;
-  }
-  .report-slide .report-value-bullet {
-    font-size: 12px;
-    line-height: 1.3;
-    margin-bottom: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    margin: 0;
+    font-weight: 700;
   }
   .report-slide-body {
-    flex: 1 1 auto;
-    min-height: 0;
     display: flex;
     flex-direction: column;
-  }
-  .report-slide-chart {
     flex: 1 1 auto;
     min-height: 0;
+  }
+  .report-slide-chart {
     display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
   }
-  .report-carousel__btn {
-    border: 2px solid rgba(30, 34, 85, 0.18);
-    background: #fff;
-    color: var(--text);
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
-    flex-shrink: 0;
+  /* Компактные графики только в примере отчёта */
+  #report-example .imb-panel {
+    padding: 8px 10px 10px;
   }
-  .report-carousel__btn--side {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    font-size: 22px;
-    line-height: 1;
-    font-weight: 400;
-    padding: 0;
-    box-shadow: 0 2px 12px rgba(30, 34, 85, 0.08);
+  #report-example .imb-panel__head {
+    margin-bottom: 6px;
+    gap: 6px;
   }
-  .report-carousel__btn--side:hover:not(:disabled) {
-    background: var(--dominant);
-    border-color: var(--orange-ring);
-    color: var(--text);
-    box-shadow: 0 4px 16px rgba(30, 34, 85, 0.12);
+  #report-example .imb-panel__title {
+    font-size: 9px;
+    line-height: 1.25;
   }
-  .report-carousel__btn:hover:not(:disabled) {
-    border-color: var(--orange-ring);
-    color: var(--orange-ring);
+  #report-example .imb-panel__unit {
+    font-size: 9px;
   }
-  .report-carousel__btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    box-shadow: none;
+  #report-example .imb-dashboard__top {
+    gap: 8px;
+    margin-bottom: 8px;
   }
-  .report-carousel__counter {
-    margin: 0;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-muted);
+  #report-example .imb-index-block {
+    min-height: 0;
+    gap: 8px;
+  }
+  #report-example .imb-index-num {
+    font-size: 40px;
+  }
+  #report-example .imb-vbar__track,
+  #report-example .imb-vbar__axis {
+    height: 88px;
+  }
+  #report-example .imb-vdotplot__yaxis {
+    height: 100px;
+    padding-bottom: 28px;
+    font-size: 9px;
+  }
+  #report-example .imb-vdotplot__grid,
+  #report-example .imb-vdotplot__col-plot {
+    height: 88px;
+  }
+  #report-example .imb-vdotplot__dot {
+    width: 9px;
+    height: 9px;
+  }
+  #report-example .imb-vdotplot__val {
+    font-size: 10px;
+  }
+  #report-example .imb-vdotplot__cat {
+    margin-top: 4px;
+    font-size: 8px;
+    line-height: 1.2;
+  }
+  #report-example .imb-vdotplot--inds .imb-vdotplot__cols {
+    gap: 4px;
+  }
+  #report-example .factor-chart--matrix .matrix-chart__h {
+    padding: 4px 6px 6px;
+    font-size: 8px;
+  }
+  #report-example .factor-chart--matrix .matrix-chart__question {
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+  #report-example .factor-chart--matrix .matrix-chart__legend {
+    margin-bottom: 6px;
+    font-size: 9px;
+    gap: 4px 8px;
+  }
+  #report-example .factor-chart--matrix .matrix-chart__label {
+    padding: 5px 8px 5px 0;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+  #report-example .factor-chart--matrix .matrix-chart__cell {
+    padding: 4px 6px;
+    min-height: 30px;
+  }
+  #report-example .factor-chart--matrix .matrix-bar--stacked {
+    height: 22px;
+  }
+  #report-example .factor-chart--matrix .matrix-bar__pct {
+    font-size: 9px;
+  }
+  #report-example .factor-chart--matrix .metric-bar {
+    height: 22px;
+  }
+  #report-example .factor-chart__note {
+    margin-top: 6px;
+    font-size: 9px;
+  }
+  #report-example .factor-chart--matrix .matrix-chart__block--spaced {
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+  #report-example .factor-chart--matrix .matrix-chart__section-title {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  #report-example .imb-vdotplot--inds .imb-vdotplot__cat--compact {
+    font-size: 7px;
+  }
+  @media (max-width: 900px) {
+    #report-example .imb-dashboard__top {
+      grid-template-columns: 1fr;
+    }
+  }
+  .report-full-download {
+    margin: 14px 0 0;
     text-align: center;
-    line-height: 1.3;
+  }
+  .report-full-download__link {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 0.15s;
+  }
+  .report-full-download__link:hover {
+    color: var(--orange-ring);
   }
   .report-slide-chart {
     min-width: 0;
@@ -903,7 +966,7 @@
   .report-slide-chart .report-panel.report-panel--professional,
   .report-slide-chart .report-panel.report-panel--personal {
     justify-content: flex-start;
-    padding: 10px 12px 12px;
+    padding: 8px 10px 10px;
     background: var(--ivory);
   }
   .report-slide-body--index {
@@ -1587,7 +1650,7 @@
     flex-direction: column;
     justify-content: flex-start;
   }
-  .report-carousel .factor-chart__tag {
+  #report-example .factor-chart__tag {
     display: none;
   }
   .factor-chart__tag {
@@ -2393,22 +2456,14 @@
 
   @media (max-width: 760px) {
     .report-page { padding: 22px 22px 26px; }
-    .report-carousel {
-      --report-carousel-offset: 9.5rem;
-      --report-carousel-h: clamp(260px, calc(100svh - var(--report-carousel-offset)), 520px);
+    .report-tab-card { padding: 6px 8px 8px; }
+    #report-example .report-pill {
+      font-size: 11px;
+      padding: 6px 9px;
     }
-    .report-carousel__stage {
-      gap: 6px;
+    #report-example .report-tab-card .report-page-title {
+      font-size: 13px;
     }
-    .report-carousel__btn--side {
-      width: 38px;
-      height: 38px;
-      font-size: 18px;
-    }
-    .report-slide-intro {
-      max-height: 4rem;
-    }
-    .report-slide { padding: 8px 10px 10px; }
     .report-index-hero { flex-wrap: wrap; }
     .report-sub-chips { grid-template-columns: 1fr; }
     .report-compact-row {
@@ -3309,23 +3364,30 @@
     <div class="section-eyebrow">Пример отчёта</div>
     <h2 class="section-title">Как выглядит итоговая аналитика для региона</h2>
 
-    <div class="report-carousel" id="reportCarousel" aria-roledescription="carousel">
-      <div class="report-carousel__stage">
-        <button type="button" class="report-carousel__btn report-carousel__btn--side" id="reportCarouselPrev" aria-label="Предыдущий слайд">‹</button>
-        <div class="report-carousel__frame">
-          <div class="report-carousel__viewport">
-            <div class="report-carousel__track" id="reportCarouselTrack">
-          <article class="report-slide report-slide--index" aria-label="Слайд 1 из 6">
+    <div class="report-example-tabs" id="reportExample">
+      <div class="np-pills report-pills" role="tablist" aria-label="Разделы примера отчёта">
+        <button type="button" class="np-pill report-pill is-active" role="tab" aria-selected="true" data-rep="index">Индекс</button>
+        <button type="button" class="np-pill report-pill" role="tab" aria-selected="false" data-rep="stress">Стресс</button>
+        <button type="button" class="np-pill report-pill" role="tab" aria-selected="false" data-rep="symptoms">Симптомы</button>
+        <button type="button" class="np-pill report-pill" role="tab" aria-selected="false" data-rep="professional">Профессиональные</button>
+        <button type="button" class="np-pill report-pill" role="tab" aria-selected="false" data-rep="personal">Личностные</button>
+        <button type="button" class="np-pill report-pill" role="tab" aria-selected="false" data-rep="social">Социальные</button>
+      </div>
+      <div class="np-pill-panels report-panels">
+        <div class="np-pill-panel report-tab-panel is-active" role="tabpanel" data-rep="index" id="reportPanelIndex">
+          <div class="report-tab-card report-slide--index">
             <div class="report-slide-intro">
               <div class="report-page-tag">Пример 1 · Индекс и структура</div>
-              <div class="report-page-title">Индекс, субиндексы и индикаторы по России</div>
+              <div class="report-page-title">Общее значение индекса и значение различных компонентов</div>
               <p class="report-value-bullet">Единая шкала и расшифровка по трём опорам — видно, какие блоки сильнее всего влияют на общий уровень.</p>
             </div>
             <div class="report-slide-body">
               <div class="report-slide-chart"><div class="report-panel report-panel--index" id="repChart1"></div></div>
             </div>
-          </article>
-          <article class="report-slide report-slide--stress" aria-label="Слайд 2 из 6">
+          </div>
+        </div>
+        <div class="np-pill-panel report-tab-panel" role="tabpanel" data-rep="stress" id="reportPanelStress" hidden>
+          <div class="report-tab-card report-slide--stress">
             <div class="report-slide-intro">
               <div class="report-page-tag">Пример 2 · Стресс-статус</div>
               <div class="report-page-title">Анализ компонента: стресс-статус</div>
@@ -3334,8 +3396,10 @@
             <div class="report-slide-body">
               <div class="report-slide-chart"><div class="report-panel report-panel--stress report-panel--chart" id="repChart2"></div></div>
             </div>
-          </article>
-          <article class="report-slide report-slide--symptoms" aria-label="Слайд 3 из 6">
+          </div>
+        </div>
+        <div class="np-pill-panel report-tab-panel" role="tabpanel" data-rep="symptoms" id="reportPanelSymptoms" hidden>
+          <div class="report-tab-card report-slide--symptoms">
             <div class="report-slide-intro">
               <div class="report-page-tag">Пример 3 · Симптомы</div>
               <div class="report-page-title">Анализ компонента: симптомы ментального неблагополучия</div>
@@ -3344,8 +3408,10 @@
             <div class="report-slide-body">
               <div class="report-slide-chart"><div class="report-panel report-panel--symptoms report-panel--chart" id="repChart3"></div></div>
             </div>
-          </article>
-          <article class="report-slide report-slide--professional" aria-label="Слайд 4 из 6">
+          </div>
+        </div>
+        <div class="np-pill-panel report-tab-panel" role="tabpanel" data-rep="professional" id="reportPanelProfessional" hidden>
+          <div class="report-tab-card report-slide--professional">
             <div class="report-slide-intro">
               <div class="report-page-tag">Пример 4 · Профессиональные факторы</div>
               <div class="report-page-title">Анализ компонента: профессиональные факторы</div>
@@ -3354,18 +3420,22 @@
             <div class="report-slide-body">
               <div class="report-slide-chart"><div class="report-panel report-panel--professional report-panel--chart" id="repChart4"></div></div>
             </div>
-          </article>
-          <article class="report-slide report-slide--personal" aria-label="Слайд 5 из 6">
+          </div>
+        </div>
+        <div class="np-pill-panel report-tab-panel" role="tabpanel" data-rep="personal" id="reportPanelPersonal" hidden>
+          <div class="report-tab-card report-slide--personal">
             <div class="report-slide-intro">
               <div class="report-page-tag">Пример 5 · Личностные факторы</div>
               <div class="report-page-title">Анализ компонента: личностные факторы</div>
-              <p class="report-value-bullet">Личные установки и контроль над жизнью — в связке с уровнем индекса ментального благополучия.</p>
+              <p class="report-value-bullet">Удовлетворённость семьёй, здоровьем, жильём, финансами и экологией — в связке с уровнем индекса.</p>
             </div>
             <div class="report-slide-body">
               <div class="report-slide-chart"><div class="report-panel report-panel--personal report-panel--chart" id="repChart5"></div></div>
             </div>
-          </article>
-          <article class="report-slide report-slide--social" aria-label="Слайд 6 из 6">
+          </div>
+        </div>
+        <div class="np-pill-panel report-tab-panel" role="tabpanel" data-rep="social" id="reportPanelSocial" hidden>
+          <div class="report-tab-card report-slide--social">
             <div class="report-slide-intro">
               <div class="report-page-tag">Пример 6 · Социальные факторы</div>
               <div class="report-page-title">Анализ компонента: социальные факторы</div>
@@ -3374,14 +3444,13 @@
             <div class="report-slide-body">
               <div class="report-slide-chart"><div class="report-panel report-panel--social report-panel--chart" id="repChart6"></div></div>
             </div>
-          </article>
-            </div>
           </div>
-          <p class="report-carousel__counter" id="reportCarouselCounter" aria-live="polite">1 / 6 · Индекс</p>
         </div>
-        <button type="button" class="report-carousel__btn report-carousel__btn--side" id="reportCarouselNext" aria-label="Следующий слайд">›</button>
       </div>
     </div>
+    <p class="report-full-download">
+      <a class="report-full-download__link" href="250901%20-%20%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%20%D0%98%D0%9C%D0%91%20-%20%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F.pdf" download>Скачать полный отчёт «Индекс ментального благополучия работающих россиян» август 2025</a>
+    </p>
   </div>
 </section>
 
@@ -3670,7 +3739,7 @@
   });
 })();
 </script>
-<script src="./report-carousel.js?v=39"></script>
+<script src="./report-carousel.js?v=43"></script>
 
 
 </body>
