@@ -1,0 +1,48 @@
+services:
+  app:
+    image: node:20-alpine
+    container_name: mhi-app
+    restart: unless-stopped
+    working_dir: /app
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+    volumes:
+      - ./:/app
+      - app_node_modules:/app/node_modules
+    command: sh -c "npm ci --omit=dev && node server.js"
+    expose:
+      - "3000"
+    networks:
+      - web
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: mhi-caddy
+    restart: unless-stopped
+    depends_on:
+      - app
+    environment:
+      SITE_HOST: ${SITE_HOST}
+      ACME_EMAIL: ${ACME_EMAIL}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
+  app_node_modules:
