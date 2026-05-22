@@ -25,7 +25,7 @@ services:
     depends_on:
       - app
     environment:
-      SITE_HOST: ${SITE_HOST}
+      SITE_HOSTS: ${SITE_HOSTS}
       ACME_EMAIL: ${ACME_EMAIL}
     ports:
       - "80:80"
